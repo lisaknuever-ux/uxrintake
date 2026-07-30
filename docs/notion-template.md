@@ -34,6 +34,13 @@ single `/plugin install lisaknuever-ux/uxrintake`. That was simply wrong — the
 has to be registered first — and people ran it, got an error, and gave up. The setup toggle
 now shows both commands in the right order.
 
+**The setup toggle can be short because the plugin carries the Notion connection.** As of
+v0.7.0 the Notion MCP server ships inside the plugin, so the setup section no longer has to
+walk anyone through `/mcp add`, a JSON config file, or a per-tool connector. What is left is
+one browser approval with a normal Notion login. The manual route still exists in the
+[setup guide](https://github.com/lisaknuever-ux/uxrintake) and the toggle links there for the
+cases where the bundled connection does not take effect.
+
 The assistant removes the callout, all three toggles, and the divider once it has written
 the brief, since instructions are noise in a finished ticket.
 

@@ -322,7 +322,7 @@ Use this when the requester already clicked "New" in the UXR Roadmap and gave yo
   - the "Rather fill it in manually?" toggle,
   - the grey "How to use" callout on older tickets,
   - the horizontal divider that separated all of this from the brief.
-  Remove any of these that are present and ignore the ones that are not; tickets created from older template versions will only have some of them. Keep the `# UX Research Brief` heading.
+  Remove any of these that are present and ignore the ones that are not; tickets created from older template versions will only have some of them. The general rule, so this keeps working when the template changes again: everything above the divider is scaffolding. Every callout and every toggle in that region is instruction rather than content, so remove all of them, including ones not named above. Keep the `# UX Research Brief` heading and everything below it.
 - Update the page properties as described in "Setting Database Properties" below.
 - Return the page link.
 
