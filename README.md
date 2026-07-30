@@ -35,11 +35,24 @@ only the packaging differs.
 
 ### GitHub Copilot (CLI or app)
 
+The repository is its own plugin marketplace, so it takes two commands:
+
 ```
-/plugin install lisaknuever-ux/uxrintake
+/plugin marketplace add lisaknuever-ux/uxrintake
+/plugin install uxr-intake@uxrintake
 ```
 
-That is it. The skill appears in your available skills immediately.
+In the Copilot desktop app, type these in the chat composer.
+
+**No plugin support in your version?** The skill is just a folder — copy it in directly:
+
+```bash
+git clone https://github.com/lisaknuever-ux/uxrintake.git
+cp -r uxrintake/skills/uxr-research-readiness-assistant ~/.copilot/skills/
+```
+
+Restart Copilot afterwards. This works in every version and is a reasonable fallback if
+anything about the plugin route misbehaves.
 
 ### Claude Code
 
@@ -174,9 +187,10 @@ if you need to rebuild or adapt it.
 ## Repository layout
 
 ```
+.github/plugin/marketplace.json                 Makes the repo its own Copilot marketplace
 .github/plugin/plugin.json                      Copilot plugin manifest
+.claude-plugin/marketplace.json                 Same, for Claude Code
 .claude-plugin/plugin.json                      Claude Code plugin manifest
-.claude-plugin/marketplace.json                 Makes the repo its own Claude marketplace
 skills/uxr-research-readiness-assistant/
 └── SKILL.md                                    The assistant itself
 docs/notion-template.md                         Notion template content, copy-paste ready
@@ -185,9 +199,9 @@ docs/notion-template.md                         Notion template content, copy-pa
 ## Contributing
 
 The skill is plain Markdown — no build step, no dependencies. Edit `SKILL.md`, bump the
-`version` in the frontmatter and in all three manifests (`.github/plugin/plugin.json`,
-`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`), add an entry to the
-Version History section at the bottom of the skill, and open a pull request.
+`version` in the frontmatter and in all four manifests under `.github/plugin/` and
+`.claude-plugin/`, add an entry to the Version History section at the bottom of the skill,
+and open a pull request.
 
 Behaviour changes are best validated the boring way: run a real intake conversation
 against a throwaway page in the UXR Roadmap and read what it writes.
