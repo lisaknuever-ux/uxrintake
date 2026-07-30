@@ -7,7 +7,7 @@ Keep it in sync with the live template if either side changes.
 - **Template page:** `3add894d-d22a-8158-af84-fc4617aa7cd3`
 
 > **Note on the duplicate.** The UXR Roadmap contains a second page with the same content:
-> **"[Duplicate — do not use] UXR Briefing Agent"** (`3add894d-d22a-80cf-8662-c52650bdeea5`).
+> **"DUPLICATE — do not use · UXR Briefing Agent"** (`3add894d-d22a-80cf-8662-c52650bdeea5`).
 > It is a duplicate of the template and is currently kept in sync by hand. The source of
 > truth is the template `3add894d-d22a-8158-af84-fc4617aa7cd3`. If you change one, change
 > both — or better, archive the duplicate. It now carries a red callout marking it as
