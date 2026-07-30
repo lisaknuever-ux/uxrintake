@@ -89,11 +89,27 @@ The assistant reads prior research and writes the intake ticket, so it needs a c
 **Notion MCP server** with access to the EGYM UX Research space — specifically the
 UXR Roadmap database.
 
-There is no API key to manage. Notion hosts the server at `https://mcp.notion.com/mcp`
-and you authorise it once with your normal Notion login. The assistant then sees exactly
-the pages you can see, nothing more.
+**The plugin now brings the server with it.** Since v0.7.0 the Notion MCP server is part
+of the plugin (see [`.mcp.json`](.mcp.json)), so installing the plugin in Copilot or
+Claude Code configures it for you. There is nothing to add by hand and no API key to
+manage. The only step left is a one-time authorisation: the first time the assistant
+touches Notion, a browser window opens for your normal Notion login. Approve it once and
+the authorisation persists across sessions. The assistant then sees exactly the pages you
+can see, nothing more.
 
-### Copilot CLI
+### Checking it worked
+
+Ask your tool: *"Search Notion for the UXR Roadmap."* If you get results back, you are
+connected. If the tools vanish mid-session, that is usually an expired session — reconnect
+and your authorisation is remembered.
+
+### Fallback: setting the server up manually
+
+Use these only if the bundled configuration does not take effect, or if your tool has no
+plugin support at all. The server is the same either way:
+`https://mcp.notion.com/mcp`, transport `http`, tools `*`.
+
+**Copilot CLI**
 
 ```
 /mcp add
@@ -108,8 +124,7 @@ Then fill in the prompts:
 | URL | `https://mcp.notion.com/mcp` |
 | Tools | `*` |
 
-A browser window opens for the Notion login. Approve it, and you are done — the
-authorisation persists across sessions.
+A browser window opens for the Notion login. Approve it, and you are done.
 
 Prefer editing the file directly? Put this in `~/.copilot/mcp-config.json`:
 
@@ -125,7 +140,7 @@ Prefer editing the file directly? Put this in `~/.copilot/mcp-config.json`:
 }
 ```
 
-### Claude Code
+**Claude Code**
 
 ```bash
 claude mcp add --transport http notion https://mcp.notion.com/mcp
@@ -133,15 +148,10 @@ claude mcp add --transport http notion https://mcp.notion.com/mcp
 
 Then run `/mcp` and authenticate when prompted.
 
-### Claude Desktop
+**Claude Desktop**
 
-**Settings → Connectors → Notion → Connect.** No configuration file involved.
-
-### Checking it worked
-
-Ask your tool: *"Search Notion for the UXR Roadmap."* If you get results back, you are
-connected. If the tools vanish mid-session, that is usually an expired session — reconnect
-with the same command; your authorisation is remembered.
+Claude Desktop does not read plugin-bundled MCP configuration, so this one is always
+manual: **Settings → Connectors → Notion → Connect.** No configuration file involved.
 
 ### If Notion is unavailable
 
@@ -187,6 +197,7 @@ if you need to rebuild or adapt it.
 ## Repository layout
 
 ```
+.mcp.json                                       Bundled Notion MCP server config
 .github/plugin/marketplace.json                 Makes the repo its own Copilot marketplace
 .github/plugin/plugin.json                      Copilot plugin manifest
 .claude-plugin/marketplace.json                 Same, for Claude Code

@@ -1,7 +1,7 @@
 ---
 name: uxr-research-readiness-assistant
 description: Helps PMs and Designers sharpen a research question, choose an appropriate method, assess readiness, check prior studies, and route to the right next step, then writes the finished brief into a new or existing UXR Roadmap ticket in Notion. Gives a plain verdict on whether the requester can run the study themselves or needs a researcher, drafts the discussion guide or questionnaire, proposes a triage priority, and recommends workshops or other formats when a study is not the right instrument. Also triggers on requests like "UXR Intake for <Notion page URL>", "fill in this UXR request", "New UXR Request (with Agent)", "UX Research Brief", or a pasted Notion link from the UXR Roadmap database.
-version: 0.6.0
+version: 0.7.0
 last_updated: July 30, 2026
 ---
 
@@ -1199,6 +1199,10 @@ This skill is built on principles from Erika Hall's "Just Enough Research":
 ---
 
 ## Version History
+
+**v0.7.0** (July 30, 2026)
+- Bundled the Notion MCP server with the plugin, so installing the plugin configures it automatically
+- Only a one-time browser authorisation with a normal Notion login remains; the manual MCP setup steps are now a fallback
 
 **v0.6.0** (July 30, 2026)
 - Added an early Wellpass vs EGYM Technology question, since business unit determines participants, recruiting, prior research, and tags
