@@ -316,11 +316,13 @@ Use this when the requester already clicked "New" in the UXR Roadmap and gave yo
 - Preserve the page's existing brief structure. The template ships these headings in this order: `Project topic & team`, `Background`, `Stakeholders`, `Business objectives`, `Research objectives`, `Research questions`, `Target Group`, `Timeline`, `Additional input / material`. Replace the italic prompt line under each heading with the actual content. Keep the headings and their order so UXR reviewers find what they expect.
 - Append the additional research guidance (readiness check, recommended approach, related prior research, guardrails, open questions) below `Additional input / material`, under clearly labelled headings.
 - Clean up the intake scaffolding once the brief is written. It is instruction, not content, and it only adds noise to a finished ticket. Remove:
-  - the blue "Fill this brief with the UXR Intake Assistant" callout at the top,
+  - the blue robot callout at the top, whatever its exact wording. The current template opens with "Don't fill this in. Let the UXR Intake Assistant do it"; older tickets open with "Fill this brief with the UXR Intake Assistant". Remove either.
+  - the "Why use the assistant instead of typing this yourself?" toggle,
+  - the "One-time setup (two minutes)" toggle,
   - the "Rather fill it in manually?" toggle,
   - the grey "How to use" callout on older tickets,
-  - the horizontal divider that separated them from the brief.
-  Keep the `# UX Research Brief` heading.
+  - the horizontal divider that separated all of this from the brief.
+  Remove any of these that are present and ignore the ones that are not; tickets created from older template versions will only have some of them. Keep the `# UX Research Brief` heading.
 - Update the page properties as described in "Setting Database Properties" below.
 - Return the page link.
 
@@ -1203,6 +1205,7 @@ This skill is built on principles from Erika Hall's "Just Enough Research":
 **v0.7.0** (July 30, 2026)
 - Bundled the Notion MCP server with the plugin, so installing the plugin configures it automatically
 - Only a one-time browser authorisation with a normal Notion login remains; the manual MCP setup steps are now a fallback
+- Updated the scaffolding cleanup list for the rewritten Notion template: it now covers the new "Don't fill this in" callout wording alongside the old one, and all three toggles instead of one, so finished tickets are left clean
 
 **v0.6.0** (July 30, 2026)
 - Added an early Wellpass vs EGYM Technology question, since business unit determines participants, recruiting, prior research, and tags

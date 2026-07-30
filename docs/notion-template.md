@@ -6,20 +6,36 @@ Keep it in sync with the live template if either side changes.
 - **Database:** UXR Roadmap — `collection://151d894d-d22a-815d-afc4-000b31967acd`
 - **Template page:** `3add894d-d22a-8158-af84-fc4617aa7cd3`
 
+> **Note on the duplicate.** The UXR Roadmap also contains a page titled
+> **"UXR Briefing Agent"** (`3add894d-d22a-80cf-8662-c52650bdeea5`) that still carries the
+> old, pre-rewrite content. It is a leftover duplicate and was deliberately left untouched.
+> Do not treat it as a second source of truth — this file and
+> `3add894d-d22a-8158-af84-fc4617aa7cd3` are.
+
 ## Why it is built this way
 
-Three constraints shaped it:
+Four constraints shaped it:
 
 1. **The instruction has to be the first thing you see.** A requester who opens a blank
-   brief starts typing. The callout has to interrupt that before it happens.
-2. **The manual path must stay available.** Not everyone has the plugin installed, and a
+   brief starts typing. The callout has to interrupt that before it happens — hence the
+   opening line "Don't fill this in", which is blunt on purpose.
+2. **Nobody installs a plugin without a reason.** The "Why use the assistant instead of
+   typing this yourself?" toggle exists to earn the two minutes of setup. It is collapsed,
+   so it costs nothing to the people who are already convinced, and it is there for the
+   ones who would otherwise close the page and type the brief by hand.
+3. **The manual path must stay available.** Not everyone has the plugin installed, and a
    template that only works with an AI assistant is a template that blocks people. The
    old instructions live in a collapsed toggle — present, but not competing for attention.
-3. **The brief headings stay untouched.** The assistant writes into them, and UXR
+4. **The brief headings stay untouched.** The assistant writes into them, and UXR
    reviewers read them in a fixed order. Changing them breaks both.
 
-The assistant removes the callout, the toggle, and the divider once it has written the
-brief, since instructions are noise in a finished ticket.
+**Installation is two commands, not one.** An earlier version of this template showed a
+single `/plugin install lisaknuever-ux/uxrintake`. That was simply wrong — the marketplace
+has to be registered first — and people ran it, got an error, and gave up. The setup toggle
+now shows both commands in the right order.
+
+The assistant removes the callout, all three toggles, and the divider once it has written
+the brief, since instructions are noise in a finished ticket.
 
 ## Content
 
@@ -27,23 +43,87 @@ Below the properties, the page body is:
 
 ---
 
-> 🤖 **Fill this brief with the UXR Intake Assistant — it takes about 10 minutes.**
+> 🤖 **Don't fill this in. Let the UXR Intake Assistant do it — about 10 minutes, one question at a time.**
 >
-> The assistant asks you a handful of questions, sharpens your research question, checks
-> whether we already researched this, recommends a method, and then writes this page for you.
+> It turns a rough idea into a research brief our team can act on: it sharpens your
+> question, checks whether we already have the answer, and picks the right method for you.
+> Then it writes this page.
 >
-> **1. Install it once** (Copilot CLI: `/plugin install lisaknuever-ux/uxrintake` ·
-> Claude and other tools: see the [setup guide](https://github.com/lisaknuever-ux/uxrintake)).
+> **1. Copy this page's URL** — top right → Copy link.
 >
-> **2. Copy this page's URL** (top right → Copy link).
+> **2. Open GitHub Copilot** (CLI or desktop app) **and paste:** `UXR Intake for <your URL>`
 >
-> **3. Start the conversation** by pasting: `UXR Intake for <paste URL>`
+> **3. Answer in your own words.** No research jargon required.
 >
-> Answer the questions in your own words. You do not need to know the right method, sample
-> size, or research type — that is the assistant's job. It will show you the finished brief
-> before anything is written here.
+> You will see the finished brief and its recommendations before a single word lands on this page.
+>
+> *First time? Open "One-time setup" below — it takes two minutes.*
 
 *(Blue background callout, robot icon.)*
+
+---
+
+▸ **Why use the assistant instead of typing this yourself?** *(toggle, collapsed)*
+
+> Because a good brief is the difference between research that changes a decision and
+> research that gets read once and forgotten. The assistant does the parts that are
+> genuinely hard:
+>
+> - **It sharpens your question.** It reflects back what it understood, names the
+>   assumptions hidden in your wording, and offers a stronger version. "Do users like the
+>   new dashboard?" becomes something that can actually be answered.
+> - **It checks what we already know.** Before recommending anything, it searches our
+>   research repository. The cheapest study is the one you don't have to run — and you
+>   might get your answer in five minutes instead of five weeks.
+> - **It picks the method for you.** Method, sample size, tool, and the bias risks to watch
+>   out for. You do not need to know what a diary study is, or how many participants make a
+>   finding trustworthy.
+> - **It tells you straight whether you can run it yourself.** Operational research you can
+>   self-serve; foundational or sensitive work gets routed to a researcher — with a strong
+>   brief already attached, so nothing stalls.
+> - **It will tell you when research is the wrong tool.** Sometimes what you need is a
+>   workshop, an analytics pull, or a decision. A brief that says so honestly saves everyone
+>   weeks.
+> - **It writes the ticket.** Every section below, filled in properly, in the order our
+>   reviewers expect. No blank fields, no "we'll come back to you for more detail".
+>
+> The short version: you bring the problem, it brings the research craft.
+
+---
+
+▸ **One-time setup (two minutes)** *(toggle, collapsed)*
+
+> **GitHub Copilot — CLI or desktop app**
+>
+> Run these two commands in the Copilot chat composer:
+>
+> ```
+> /plugin marketplace add lisaknuever-ux/uxrintake
+> /plugin install uxr-intake@uxrintake
+> ```
+>
+> The first registers this repository as a plugin source, the second installs the
+> assistant. Restart Copilot afterwards.
+>
+> **Notion access**
+>
+> The assistant needs to read our past research and write to this page, so it connects to
+> Notion. The connection ships with the plugin — you only have to approve it once in your
+> browser with your normal Notion login. It then sees exactly the pages you can see,
+> nothing more.
+>
+> If no login prompt appears, or the assistant says it cannot reach Notion, follow the
+> *Notion access* section in the [setup guide](https://github.com/lisaknuever-ux/uxrintake)
+> to add the connection manually.
+>
+> **Claude Code, Claude Desktop, ChatGPT, or anything else**
+>
+> The assistant works there too. The
+> [setup guide](https://github.com/lisaknuever-ux/uxrintake) has a section for each.
+>
+> **Check it worked**
+>
+> Ask your tool: *"Search Notion for the UXR Roadmap."* If you get results back, you are ready.
 
 ---
 
@@ -99,3 +179,6 @@ The Notion API cannot register a page as a database template, so this step is ma
 3. Name it `New UXR Request (with Agent)`.
 4. Paste the content above.
 5. Optionally set it as the default template so it is what people get by default.
+
+The live template page is `3add894d-d22a-8158-af84-fc4617aa7cd3`. If you edit it in Notion,
+mirror the change here in the same commit — this file is the only version-controlled copy.
