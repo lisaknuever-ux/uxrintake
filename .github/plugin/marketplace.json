@@ -2,7 +2,7 @@
   "name": "uxrintake",
   "metadata": {
     "description": "The UXR Intake Assistant — a guided front door for UX research requests.",
-    "version": "0.5.0"
+    "version": "0.6.0"
   },
   "owner": {
     "name": "Lisa Knüver",
@@ -13,7 +13,7 @@
       "name": "uxr-intake",
       "source": "./",
       "description": "Guided UX research intake. Sharpens a research question, recommends a rigorous method, checks prior studies, and writes the finished brief into the UXR Roadmap in Notion. Requires a connected Notion MCP server.",
-      "version": "0.5.0"
+      "version": "0.6.0"
     }
   ]
 }
