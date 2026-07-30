@@ -76,13 +76,65 @@ The assistant reads prior research and writes the intake ticket, so it needs a c
 **Notion MCP server** with access to the EGYM UX Research space — specifically the
 UXR Roadmap database.
 
-- **Copilot CLI:** `/mcp add` and follow the Notion OAuth flow.
-- **Claude Code:** `claude mcp add notion` (or add the Notion server to `.mcp.json`).
-- **Claude Desktop:** enable the Notion connector under Settings → Connectors.
+There is no API key to manage. Notion hosts the server at `https://mcp.notion.com/mcp`
+and you authorise it once with your normal Notion login. The assistant then sees exactly
+the pages you can see, nothing more.
 
-Without Notion access the assistant still runs the full intake conversation and hands you
-the finished brief as copy-pasteable Markdown. It will tell you up front that it cannot
-write the ticket rather than pretending it did.
+### Copilot CLI
+
+```
+/mcp add
+```
+
+Then fill in the prompts:
+
+| Field | Value |
+|---|---|
+| Server name | `notion` |
+| Server type | `HTTP` |
+| URL | `https://mcp.notion.com/mcp` |
+| Tools | `*` |
+
+A browser window opens for the Notion login. Approve it, and you are done — the
+authorisation persists across sessions.
+
+Prefer editing the file directly? Put this in `~/.copilot/mcp-config.json`:
+
+```json
+{
+  "mcpServers": {
+    "notion": {
+      "type": "http",
+      "url": "https://mcp.notion.com/mcp",
+      "tools": ["*"]
+    }
+  }
+}
+```
+
+### Claude Code
+
+```bash
+claude mcp add --transport http notion https://mcp.notion.com/mcp
+```
+
+Then run `/mcp` and authenticate when prompted.
+
+### Claude Desktop
+
+**Settings → Connectors → Notion → Connect.** No configuration file involved.
+
+### Checking it worked
+
+Ask your tool: *"Search Notion for the UXR Roadmap."* If you get results back, you are
+connected. If the tools vanish mid-session, that is usually an expired session — reconnect
+with the same command; your authorisation is remembered.
+
+### If Notion is unavailable
+
+The assistant still runs the full intake conversation and hands you the finished brief as
+copy-pasteable Markdown. It tells you up front that it cannot write the ticket rather than
+pretending it did.
 
 ---
 
