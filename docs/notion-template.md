@@ -1,17 +1,43 @@
-# Notion template: "New UXR Request (with Agent)"
+# Notion template: "UXR Briefing Agent"
 
 This is the content of the UXR Roadmap template that points requesters at the assistant.
 Keep it in sync with the live template if either side changes.
 
 - **Database:** UXR Roadmap — `collection://151d894d-d22a-815d-afc4-000b31967acd`
-- **Template page:** `3add894d-d22a-8158-af84-fc4617aa7cd3`
+  (database page `151d894d-d22a-802e-826d-ce09e46f2958`)
+- **Registered template, and the source of truth:**
+  `3add894d-d22a-80b8-bc68-e7fe4b6e3795` — "UXR Briefing Agent". This is the one that
+  appears in the template picker, so it is the page stakeholders actually get. The content
+  documented below is what lives here.
+- **Default template:** `15ad894d-d22a-8078-848d-e5f89589029b` — "New UXR Request". It
+  deliberately still carries the old content with no mention of the assistant, because the
+  team wants to run both variants side by side for a while.
 
-> **Note on the duplicate.** The UXR Roadmap contains a second page with the same content:
-> **"DUPLICATE — do not use · UXR Briefing Agent"** (`3add894d-d22a-80cf-8662-c52650bdeea5`).
-> It is a duplicate of the template and is currently kept in sync by hand. The source of
-> truth is the template `3add894d-d22a-8158-af84-fc4617aa7cd3`. If you change one, change
-> both — or better, archive the duplicate. It now carries a red callout marking it as
-> scheduled for deletion, so once it is in the trash this note can go too.
+> **Note on the surplus copies.** Two further pages carry the same content but are *not*
+> registered templates — they are ordinary database rows left over from the rebuild, and
+> both are meant to be cleaned up:
+>
+> - `3add894d-d22a-8158-af84-fc4617aa7cd3` — "New UXR Request (with Agent)". Despite the
+>   name, Notion does not know it as a template. This file previously named it as the
+>   source of truth, which was wrong.
+> - `3add894d-d22a-80cf-8662-c52650bdeea5` — "DUPLICATE — do not use · UXR Briefing Agent".
+>   Carries a red callout marking it as scheduled for deletion.
+>
+> They are currently kept in sync by hand. If you change one, change all of them — or
+> better, archive the two surplus copies and leave only the registered template.
+>
+> This confusion is the whole reason for this section: four near-identical pages existed and
+> nobody could tell which one Notion actually served. Verify against the database's
+> `page_templates` field, not against a page's title.
+
+To check which page is really the template:
+
+```
+page_templates       → the registered non-default templates
+default_page_template → the one used when you just click "New"
+```
+
+Both are fields on the UXR Roadmap database `151d894d-d22a-802e-826d-ce09e46f2958`.
 
 ## Why it is built this way
 
@@ -184,9 +210,17 @@ The Notion API cannot register a page as a database template, so this step is ma
 
 1. Open the **UXR Roadmap** database.
 2. Click the arrow next to **New** → **New template**.
-3. Name it `New UXR Request (with Agent)`.
+3. Name it `UXR Briefing Agent`.
 4. Paste the content above.
 5. Optionally set it as the default template so it is what people get by default.
 
-The live template page is `3add894d-d22a-8158-af84-fc4617aa7cd3`. If you edit it in Notion,
-mirror the change here in the same commit — this file is the only version-controlled copy.
+> **Write the new page ID into this file straight away.** A template created through the UI
+> gets a fresh page ID that nothing else knows about. Skipping this step is exactly how the
+> repo ended up documenting a page that was never a registered template, while four
+> near-identical copies drifted apart and the one people actually saw went stale. Update the
+> ID list at the top of this file, and the known-template list in
+> `skills/uxr-research-readiness-assistant/SKILL.md`, in the same commit.
+
+The registered template page is `3add894d-d22a-80b8-bc68-e7fe4b6e3795`. If you edit it in
+Notion, mirror the change here in the same commit — this file is the only version-controlled
+copy.

@@ -184,13 +184,14 @@ Expect roughly 10 minutes and one question at a time.
 
 ## The Notion side
 
-The UXR Roadmap database carries a template called **"New UXR Request (with Agent)"**.
+The UXR Roadmap database carries a template called **"UXR Briefing Agent"**.
 It opens with a short callout telling requesters how to start the assistant, keeps the
-manual instructions in a collapsed toggle for people who would rather type it themselves,
-and then lists the usual brief headings for the assistant to fill.
+setup instructions and the manual route in collapsed toggles for people who would rather
+type it themselves, and then lists the usual brief headings for the assistant to fill.
 
 The exact callout markup lives in [`docs/notion-template.md`](docs/notion-template.md)
-if you need to rebuild or adapt it.
+if you need to rebuild or adapt it. That file also records which page IDs are real
+templates and which are leftover copies — worth reading before editing anything in Notion.
 
 ---
 
