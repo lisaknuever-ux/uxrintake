@@ -6,11 +6,12 @@ Keep it in sync with the live template if either side changes.
 - **Database:** UXR Roadmap — `collection://151d894d-d22a-815d-afc4-000b31967acd`
 - **Template page:** `3add894d-d22a-8158-af84-fc4617aa7cd3`
 
-> **Note on the duplicate.** The UXR Roadmap also contains a page titled
-> **"UXR Briefing Agent"** (`3add894d-d22a-80cf-8662-c52650bdeea5`) that still carries the
-> old, pre-rewrite content. It is a leftover duplicate and was deliberately left untouched.
-> Do not treat it as a second source of truth — this file and
-> `3add894d-d22a-8158-af84-fc4617aa7cd3` are.
+> **Note on the duplicate.** The UXR Roadmap contains a second page with the same content:
+> **"[Duplicate — do not use] UXR Briefing Agent"** (`3add894d-d22a-80cf-8662-c52650bdeea5`).
+> It is a duplicate of the template and is currently kept in sync by hand. The source of
+> truth is the template `3add894d-d22a-8158-af84-fc4617aa7cd3`. If you change one, change
+> both — or better, archive the duplicate. It now carries a red callout marking it as
+> scheduled for deletion, so once it is in the trash this note can go too.
 
 ## Why it is built this way
 
