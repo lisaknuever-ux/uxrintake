@@ -1,0 +1,23 @@
+{
+  "name": "uxr-intake",
+  "description": "Guided UX research intake for EGYM. Sharpens a research question, recommends a rigorous method, checks prior studies, and writes the finished brief into the UXR Roadmap in Notion.",
+  "version": "0.5.0",
+  "author": {
+    "name": "Lisa Knüver",
+    "url": "https://github.com/lisaknuever-ux"
+  },
+  "repository": "https://github.com/lisaknuever-ux/uxrintake",
+  "license": "MIT",
+  "keywords": [
+    "ux-research",
+    "uxr",
+    "research-intake",
+    "notion",
+    "product-management",
+    "design",
+    "research-ops"
+  ],
+  "skills": [
+    "./skills/uxr-research-readiness-assistant"
+  ]
+}
