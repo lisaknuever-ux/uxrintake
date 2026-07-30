@@ -43,13 +43,17 @@ That is it. The skill appears in your available skills immediately.
 
 ### Claude Code
 
+```
+/plugin marketplace add lisaknuever-ux/uxrintake
+/plugin install uxr-intake@uxrintake
+```
+
+If your Claude Code version predates plugin support, copy the skill folder instead:
+
 ```bash
 git clone https://github.com/lisaknuever-ux/uxrintake.git
 cp -r uxrintake/skills/uxr-research-readiness-assistant ~/.claude/skills/
 ```
-
-Restart Claude Code. Use `--project` scope instead of `~/.claude/skills/` if you only
-want it in one repository.
 
 ### Claude Desktop / claude.ai
 
@@ -119,6 +123,8 @@ if you need to rebuild or adapt it.
 
 ```
 .github/plugin/plugin.json                      Copilot plugin manifest
+.claude-plugin/plugin.json                      Claude Code plugin manifest
+.claude-plugin/marketplace.json                 Makes the repo its own Claude marketplace
 skills/uxr-research-readiness-assistant/
 └── SKILL.md                                    The assistant itself
 docs/notion-template.md                         Notion template content, copy-paste ready
@@ -127,8 +133,9 @@ docs/notion-template.md                         Notion template content, copy-pa
 ## Contributing
 
 The skill is plain Markdown — no build step, no dependencies. Edit `SKILL.md`, bump the
-`version` in both the frontmatter and `plugin.json`, add an entry to the Version History
-section at the bottom of the skill, and open a pull request.
+`version` in the frontmatter and in all three manifests (`.github/plugin/plugin.json`,
+`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`), add an entry to the
+Version History section at the bottom of the skill, and open a pull request.
 
 Behaviour changes are best validated the boring way: run a real intake conversation
 against a throwaway page in the UXR Roadmap and read what it writes.

@@ -1,0 +1,25 @@
+{
+  "name": "uxrintake",
+  "description": "The UXR Intake Assistant — a guided front door for UX research requests.",
+  "owner": {
+    "name": "Lisa Knüver",
+    "url": "https://github.com/lisaknuever-ux"
+  },
+  "plugins": [
+    {
+      "name": "uxr-intake",
+      "description": "Guided UX research intake. Sharpens a research question, recommends a rigorous method, checks prior studies, and writes the finished brief into the UXR Roadmap in Notion. Requires a connected Notion MCP server.",
+      "version": "0.5.0",
+      "source": "./",
+      "author": {
+        "name": "Lisa Knüver"
+      },
+      "skills": [
+        {
+          "name": "uxr-research-readiness-assistant",
+          "path": "skills/uxr-research-readiness-assistant"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "uxr-intake",
+  "description": "Guided UX research intake. Sharpens a research question, recommends a rigorous method, checks prior studies, and writes the finished brief into the UXR Roadmap in Notion.",
+  "version": "0.5.0",
+  "author": {
+    "name": "Lisa Knüver",
+    "url": "https://github.com/lisaknuever-ux"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ux-research",
+    "uxr",
+    "research-intake",
+    "notion",
+    "product-management",
+    "design",
+    "research-ops",
+    "claude-code",
+    "copilot-cli",
+    "skills"
+  ],
+  "homepage": "https://github.com/lisaknuever-ux/uxrintake",
+  "repository": "https://github.com/lisaknuever-ux/uxrintake",
+  "skills": "./skills/"
+}
