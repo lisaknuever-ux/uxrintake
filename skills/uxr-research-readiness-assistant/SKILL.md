@@ -1,7 +1,7 @@
 ---
 name: uxr-research-readiness-assistant
 description: Helps PMs and Designers sharpen a research question, choose an appropriate method, assess readiness, check prior studies, and route to the right next step, then writes the finished brief into a new or existing UXR Roadmap ticket in Notion. Gives a plain verdict on whether the requester can run the study themselves or needs a researcher, drafts the discussion guide or questionnaire, proposes a triage priority, and recommends workshops or other formats when a study is not the right instrument. Also triggers on requests like "UXR Intake for <Notion page URL>", "fill in this UXR request", "New UXR Request (with Agent)", "UX Research Brief", or a pasted Notion link from the UXR Roadmap database.
-version: 0.7.6
+version: 0.7.7
 last_updated: August 3, 2026
 ---
 
@@ -400,8 +400,12 @@ Use this when no existing page was referenced.
 
 Every ticket this skill writes must be recognisable as agent-drafted at a glance — in the database list and inside the page. This is not decoration. A reader who mistakes an agent draft for a reviewed brief trusts the priority scores more than they have earned.
 
-- **Page icon:** set the page icon to the workspace custom emoji `:uxr-skill:`. In the UXR Roadmap list view this is the fastest signal available, because triage sees it without opening anything. Set it in both modes, including when filling in a page the requester created from a template.
-- **If Notion rejects `:uxr-skill:`** with "Custom emoji not found in this workspace", fall back to 🤖 and carry on. A missing icon must never block the ticket from being written, and there is no reason to raise it with the requester — it is housekeeping on the UXR side.
+- **Page icon:** set the page icon to this image URL:
+
+  `https://raw.githubusercontent.com/lisaknuever-ux/uxrintake/main/assets/uxr-skill.png`
+
+  In the UXR Roadmap list view this is the fastest signal available, because triage sees it without opening anything. Set it in both modes, including when filling in a page the requester created from a template. The file lives in the public `lisaknuever-ux/uxrintake` repository next to this skill; if that repository is ever made private or moved, the icon stops loading and the URL here needs updating.
+- **If Notion rejects the icon** for any reason, fall back to 🤖 and carry on. A missing icon must never block the ticket from being written, and there is no reason to raise it with the requester — it is housekeeping on the UXR side.
 - **First block in the page body**, directly above `# UX Research Brief`:
 
 ```markdown
@@ -1312,6 +1316,10 @@ This skill is built on principles from Erika Hall's "Just Enough Research":
 ---
 
 ## Version History
+
+**v0.7.7** (August 3, 2026)
+- The page icon is now a hosted image rather than a custom emoji, because custom emoji have to be uploaded by hand in the Notion UI and the skill cannot create one
+- Icon file added to the repository so the URL stays under UXR's own control
 
 **v0.7.6** (August 3, 2026)
 - The page icon is now the workspace custom emoji `:uxr-skill:` rather than 🤖, so an agent-drafted ticket carries a mark that belongs to the UXR team rather than a generic one
