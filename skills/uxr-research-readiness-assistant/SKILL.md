@@ -1,7 +1,7 @@
 ---
 name: uxr-research-readiness-assistant
 description: Helps PMs and Designers sharpen a research question, choose an appropriate method, assess readiness, check prior studies, and route to the right next step, then writes the finished brief into a new or existing UXR Roadmap ticket in Notion. Gives a plain verdict on whether the requester can run the study themselves or needs a researcher, drafts the discussion guide or questionnaire, proposes a triage priority, and recommends workshops or other formats when a study is not the right instrument. Also triggers on requests like "UXR Intake for <Notion page URL>", "fill in this UXR request", "New UXR Request (with Agent)", "UX Research Brief", or a pasted Notion link from the UXR Roadmap database.
-version: 0.7.0
+version: 0.7.1
 last_updated: August 3, 2026
 ---
 
@@ -37,7 +37,22 @@ This skill writes into Notion. Check this before promising a ticket.
 
 ---
 
-### Mandatory Intake Behavior
+## Language
+
+Two rules, and they are independent of each other.
+
+**The conversation follows the requester's language.** If they write in German, answer in German. Match whatever they use, and keep matching it for the whole intake.
+
+**The ticket content is always English**, no matter which language the conversation runs in. That covers everything that ends up in Notion: the page title (`Product area`), every brief section, the research guidance, the reasoning under "Priority proposal", the drafted study material (discussion guide, task set, questionnaire), and the open questions. The UXR Roadmap is a shared, searchable database — mixed-language tickets break filtering, search, and readability for every other researcher.
+
+- **Translate, do not pass through.** When the requester phrases their research question, hypothesis, or stakeholder description in German, render it in English for the ticket rather than copying it verbatim. Preserve the meaning exactly: no hedging that was not there, no shift in scope or emphasis through the translation.
+- **Confirm in English.** The brief you show in STEP 6 is already the English version, exactly as it will be written. Otherwise someone approves one text and a different one lands in Notion. The framing around it — "Does this look right?", explanations, follow-up questions — stays in the conversation language. When the conversation runs in German, mention in passing that the ticket is created in English. It is a note, not a question; this is not negotiable.
+- **Fixed values are never translated.** All select values and tags are English constants from the Notion schema: `Self-Serve`, `UXR-Sparring`, `UXR-Led`, `Lead`, `Sparring / Enablement`, `Intake`, `Backlog`, `XS`–`XL`, and the tag vocabulary. Use them verbatim, never localised or adapted.
+- **The Markdown fallback counts as ticket content.** When Notion access is missing and you output the full brief as copy-pasteable Markdown instead, that output is English too.
+
+---
+
+## Mandatory Intake Behavior
 
 When a user wants to create a UXR Roadmap request:
 - Do not create an empty or lightly populated ticket first.
@@ -46,6 +61,7 @@ When a user wants to create a UXR Roadmap request:
 - If the user already has a detailed brief, audit it and ask only about material gaps rather than restarting the intake.
 - Create the ticket only after the user has seen and confirmed the final brief and recommendations.
 - If the requester references an existing UXR Roadmap page (a Notion page URL or ID, or wording such as "fill in this ticket" / "UXR Intake for <URL>"), fill that page instead of creating a new one. Confirm the page title back to them at the start so they know which ticket will be written to. See STEP 6.
+- Talk to the requester in their language, but write the ticket in English — see "Language".
 - Never block progress merely because some optional detail is unknown. Mark unresolved information clearly and route it for UXR triage.
 - Optimize for a complete, useful brief rather than perfect wording. Limit research-question clarification, then complete all required Notion briefing sections efficiently.
 
@@ -222,7 +238,7 @@ The final classification is a reasoned recommendation, not a gatekeeping verdict
 
 ### STEP 5b: Give a Plain Ownership Verdict
 
-Requesters cannot judge whether they need a researcher. That is precisely why they are asking. So do not hand them a hedged assessment and let them decide — state a verdict, in their language, and say what it means for them practically.
+Requesters cannot judge whether they need a researcher. That is precisely why they are asking. So do not hand them a hedged assessment and let them decide — state a verdict, in plain terms they can act on, and say what it means for them practically.
 
 Lead with the consequence, not the label:
 
@@ -303,6 +319,8 @@ Be honest when the scores are low. A request that is not urgent, not high-impact
 ### STEP 6: Confirm and Write the Roadmap Ticket
 
 Show the complete final brief and research guidance before writing anything. Ask the requester to confirm that it accurately represents their request.
+
+Show it in English — the brief you display is the brief you write, so nobody confirms one version and gets another. Keep the framing around it in the conversation language, and if that language is not English, note in passing that the ticket is created in English. See "Language".
 
 There are two targets. Choose based on how the conversation started.
 
@@ -1044,6 +1062,8 @@ When enough information is available, produce a summary that can be copied into 
 
 If information is missing, write **Open: [specific question]**. Do not invent an answer.
 
+Always fill this template in English, whatever language the conversation is in — see "Language".
+
 ```markdown
 # UX Research Brief
 
@@ -1202,6 +1222,13 @@ This skill is built on principles from Erika Hall's "Just Enough Research":
 ---
 
 ## Version History
+
+**v0.7.1** (August 3, 2026)
+- Added a `Language` section: the conversation follows the requester's language, but the ticket content is always written in English
+- Content phrased in another language is translated for the ticket rather than passed through, with the meaning preserved
+- The brief shown for confirmation in STEP 6 is already the English version, so nobody approves a text that differs from what lands in Notion
+- Clarified that schema select values and tags are never localised, and that the Markdown fallback counts as ticket content
+- Reworded the ownership verdict in STEP 5b from "in their language" to "in plain terms they can act on", which is what it always meant
 
 **v0.7.0** (August 3, 2026)
 - Moved the triage scores from a 1–5 to a 1–3 scale, with all three steps anchored so the middle value means something specific
