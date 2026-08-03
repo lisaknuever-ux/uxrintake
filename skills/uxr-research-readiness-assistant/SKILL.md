@@ -1,7 +1,7 @@
 ---
 name: uxr-research-readiness-assistant
 description: Helps PMs and Designers sharpen a research question, choose an appropriate method, assess readiness, check prior studies, and route to the right next step, then writes the finished brief into a new or existing UXR Roadmap ticket in Notion. Gives a plain verdict on whether the requester can run the study themselves or needs a researcher, drafts the discussion guide or questionnaire, proposes a triage priority, and recommends workshops or other formats when a study is not the right instrument. Also triggers on requests like "UXR Intake for <Notion page URL>", "fill in this UXR request", "New UXR Request (with Agent)", "UX Research Brief", or a pasted Notion link from the UXR Roadmap database.
-version: 0.7.4
+version: 0.7.5
 last_updated: August 3, 2026
 ---
 
@@ -382,6 +382,7 @@ Use this when the requester already clicked "New" in the UXR Roadmap and gave yo
   - the grey "How to use" callout on older tickets,
   - the horizontal divider that separated them from the brief.
   Keep the `# UX Research Brief` heading.
+- Set the page icon to 🤖 and add the agent-generated callout — see "Marking the Ticket as Agent-Generated".
 - Update the page properties as described in "Setting Database Properties" below.
 - Return the page link.
 
@@ -391,8 +392,24 @@ Use this when no existing page was referenced.
 
 - Create one new page in the UXR Roadmap data source: `collection://151d894d-d22a-815d-afc4-000b31967acd`.
 - Put the complete brief and research guidance in the page body.
+- Set the page icon to 🤖 and add the agent-generated callout — see "Marking the Ticket as Agent-Generated".
 - Set the properties as described in "Setting Database Properties" below.
 - Return the new Notion page link.
+
+### Marking the Ticket as Agent-Generated
+
+Every ticket this skill writes must be recognisable as agent-drafted at a glance — in the database list and inside the page. This is not decoration. A reader who mistakes an agent draft for a reviewed brief trusts the priority scores more than they have earned.
+
+- **Page icon:** set the page icon to 🤖. In the UXR Roadmap list view this is the fastest signal available, because triage sees it without opening anything. Set it in both modes, including when filling in a page the requester created from a template.
+- **First block in the page body**, directly above `# UX Research Brief`:
+
+```markdown
+<callout icon="🤖" color="blue_bg">
+	**Drafted by the UXR Research Readiness Assistant.** This brief was written automatically from an intake conversation with the requester. Everything in it is a proposal: the priority scores, the recommended method, the ownership verdict, and any drafted study material are for UXR triage to confirm, adjust, or overwrite.
+</callout>
+```
+
+Keep this callout in English like the rest of the ticket, never reword it into something vaguer, and never remove it on a later pass. If a researcher later takes the ticket over and rewrites it, removing the marker is their decision, not the skill's.
 
 ### Setting Database Properties
 
@@ -1108,6 +1125,10 @@ If information is missing, write **Open: [specific question]**. Do not invent an
 Always fill this template in English, whatever language the conversation is in — see "Language".
 
 ```markdown
+<callout icon="🤖" color="blue_bg">
+	**Drafted by the UXR Research Readiness Assistant.** This brief was written automatically from an intake conversation with the requester. Everything in it is a proposal: the priority scores, the recommended method, the ownership verdict, and any drafted study material are for UXR triage to confirm, adjust, or overwrite.
+</callout>
+
 # UX Research Brief
 
 ## Project topic & team
@@ -1237,12 +1258,12 @@ Munich-based, per "Meet the Team" in Notion. Use this to know where a ticket sho
 | Person | Covers |
 | --- | --- |
 | Kilian Hughes (Head of UXR) | No fixed product area; escalation contact, oversees the team |
-| Vanessa Luksch | Wellpass, currently on leave |
+| Vanessa Luksch | Wellpass, currently not taking new requests |
 | Lisa Knüver | Wellpass |
 | Sally Kuehnlein | Cross-cutting JTBD and segmentation work that feeds every product area |
 | Anastasia Alexandra Trisnayuda | Business / operator portal (Business Suite) |
 | Julia Stenzel | Machines, Fitness Hub, Smart Strength, Smart Cardio; starts 2026-08-15 |
-| Mireia Hoderlein Garcia | Covering Sarah Arnold's projects, mostly Genius, while she is on leave |
+| Mireia Hoderlein Garcia | Covering Sarah Arnold's projects, mostly Genius |
 | Sinn (interim, until Julia starts) | Fitness Hub, Fusion/Duals, Smart Cardio |
 
 Nexus, the Matrix strength-console partnership, counts as part of the machines bucket.
@@ -1250,6 +1271,8 @@ Nexus, the Matrix strength-console partnership, counts as part of the machines b
 **Never name a researcher to the requester.** The single exception is when they explicitly ask who is on the team. Even then, leave out who is on leave, who is covering on an interim basis, and anyone's confirmation or sign-off status. A requester who hears a name tends to chase that person directly instead of going through triage, which is exactly what the intake process exists to prevent.
 
 **Covering an area and the role someone holds in a conversation are two different things.** A researcher who covers an area still goes through the same ticket process as anyone else when they are the one making the request.
+
+**Absence reasons are deliberately not recorded here.** Whether someone is on leave, and why, is their business and nobody needs it to route a ticket. Knowing that a person is not currently taking requests is enough.
 
 **This roster ages.** Leave periods end, start dates pass, and interim coverage lapses. When the answer actually matters, check "Meet the Team" in Notion rather than trusting this table.
 
@@ -1288,6 +1311,11 @@ This skill is built on principles from Erika Hall's "Just Enough Research":
 ---
 
 ## Version History
+
+**v0.7.5** (August 3, 2026)
+- Every ticket is now marked as agent-generated: the page icon is set to 🤖 and a callout at the top of the body states that the brief was drafted automatically and that everything in it is a proposal
+- The marker exists so triage never mistakes an agent draft for a reviewed brief and over-trusts the priority scores
+- Removed absence reasons from the team roster; knowing that someone is not currently taking requests is enough to route a ticket
 
 **v0.7.4** (August 3, 2026)
 - Added "The UXR Team" with current product-area coverage, so the skill knows where a ticket routes internally
