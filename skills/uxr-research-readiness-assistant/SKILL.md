@@ -1,7 +1,7 @@
 ---
 name: uxr-research-readiness-assistant
 description: Helps PMs and Designers sharpen a research question, choose an appropriate method, assess readiness, check prior studies, and route to the right next step, then writes the finished brief into a new or existing UXR Roadmap ticket in Notion. Gives a plain verdict on whether the requester can run the study themselves or needs a researcher, drafts the discussion guide or questionnaire, proposes a triage priority, and recommends workshops or other formats when a study is not the right instrument. Also triggers on requests like "UXR Intake for <Notion page URL>", "fill in this UXR request", "New UXR Request (with Agent)", "UX Research Brief", or a pasted Notion link from the UXR Roadmap database.
-version: 0.7.2
+version: 0.7.3
 last_updated: August 3, 2026
 ---
 
@@ -33,7 +33,11 @@ This skill writes into Notion. Check this before promising a ticket.
 - At the end, output the complete brief as copy-pasteable Markdown using the exact headings from the UXR Roadmap template, so the requester can paste it into their page themselves.
 - Never silently skip the write step and never claim a ticket exists without a returned page URL.
 
-**Optional:** Miro boards, Figma files, prototypes, dashboards, and analytics links. Ask for these actively rather than waiting for the requester to offer them — see STEP 3. Know the limit: there is no search across Miro or Figma, so the skill only ever works with a concrete link somebody gives it, and can only read that link's content when a suitable tool is available in the current setup. Continue without them when they do not exist, and record links you cannot open in the brief anyway.
+**Strongly recommended:** A connected Slack integration. Much of EGYM's usable prior knowledge appears in Slack before it is ever written up, and Slack is also the fastest way to discover Miro and Figma links nobody would think to mention. Search it as a matter of course during the prior-research step. When Slack access is missing, say so and name what that leaves unchecked.
+
+**Optional:** Miro boards, Figma files, prototypes, dashboards, and analytics links. Ask for these actively rather than waiting for the requester to offer them — see STEP 3. Know the limit: there is no search across Miro or Figma, so the skill only ever works with a concrete link somebody gives it, and can only read that link's content when a suitable tool is available in the current setup. An official Miro MCP server exists and can be connected; the Figma MCP is subject to EGYM IT policy. Continue without them when they do not exist, and record links you cannot open in the brief anyway.
+
+**Not available anywhere:** NotebookLM has no public API. No assistant can query it. Ask the requester to paste the relevant summary instead of promising a search.
 
 ---
 
@@ -145,24 +149,47 @@ Use a strict framing budget, followed by structured brief completion:
 - **Skip known fields:** Reuse existing answers instead of asking again.
 - If the user says "good enough," "continue," or "create a draft," stop optional probing. Still show which required briefing fields remain open before creating the ticket.
 
-Once the topic and working question are clear enough, automatically search the Notion research repository:
+Once the topic and working question are clear enough, automatically search for prior knowledge:
 - Have we researched this before?
 - Are there related findings that already answer part of the question?
 - Is this a follow-up, replication, or genuinely new study?
 
+#### Search every source you actually have
+
+Do not stop at the UXR Roadmap. Half the relevant evidence at EGYM lives outside it, and a brief that ignores it sends a researcher to re-learn something the company already knows.
+
+**Notion — always, and more than once.** Search the UXR Roadmap for prior tickets, but also the wider workspace for discovery pages, survey reports, JTBD work, workshop documentation, and strategy pages. Run several queries with different vocabulary, including German and English terms, because the same topic is rarely named consistently. Follow promising pages one level deeper rather than trusting the search snippet.
+
+**Slack — always, when the tool is available.** This is where research links, workshop reactions, and raw first findings surface weeks before anything is written up. Search public and private channels for the topic, and check `#uxr`, the relevant product channels, and any channel the requester named. Two patterns are especially productive:
+- Searching the topic together with `miro`, `figma`, `notion`, or `survey` surfaces links to material nobody would think to mention.
+- Searching for the people involved surfaces handovers and status updates that explain what already happened.
+
+Treat Slack content by the same rule as everything else: a colleague's message is stakeholder evidence unless it reports collected user data.
+
+**Miro, Figma, and similar canvases — only via a concrete link.** There is no full-text search across boards or design files, so these can never be "searched" the way Notion and Slack can. What often works instead: a Notion page or Slack message contains the board link, and the surrounding text describes what is on it. Harvest links that way, then read the board itself only if a suitable tool is connected in the current setup.
+
+**Never claim a source was searched when it was not.** If Slack, Miro, or Figma access is missing, say so explicitly and name what that leaves unchecked. Silent gaps are worse than stated ones, because the reader assumes coverage.
+
+**Tools that do not exist.** NotebookLM has no public API and cannot be queried by any assistant. If a requester relies on it, ask them to paste the relevant summary rather than promising a search.
+
 #### Ask for existing material instead of waiting for it
 
-The Notion search covers prior studies. It does not cover Miro or Figma, and it cannot: there is no full-text search across boards or design files. The skill only ever works with a concrete link somebody gives it, and can only read that link's content when a suitable tool is available in the current setup. Never state or imply that Miro or Figma has been searched. Ask instead.
+Searching finds what was written down. It does not find the board somebody made in a workshop and never linked. Ask for that too.
 
 Requesters rarely volunteer this material. Nobody remembers the discovery board from six months ago while describing a new question, so knowledge that already exists in the house quietly goes missing. Ask for it actively, as **one** question rather than three:
 
-> Is there anything on this topic already — a Miro board from discovery, a workshop, a synthesis or journey map, a Figma file or prototype, a dashboard?
+> Is there anything on this topic already — a Miro board from discovery, a workshop, a synthesis or journey map, a Figma file or prototype, a Mixpanel report or dashboard?
 
 That is one question about existing material, not a form. Keep it in a single turn and take whatever comes back. It belongs in briefing mode, with item 15 "Available materials or links", or next to the evidence check in item 5. It is not a third framing follow-up, so the two-follow-up framing budget above stays untouched.
 
-**What happens with a link you receive:**
-- **You can read it:** inspect the content, use it in the next question, and reflect it in the brief.
-- **You cannot read it** — no suitable tool available: record the link in the brief under `Additional input / material` regardless, and say plainly that you were unable to open it. A link you could not evaluate is still valuable to the researcher who picks the ticket up later. Dropping it silently is the only real failure mode here.
+**Every link goes into the ticket. No exceptions.**
+
+`Additional input / material` must list every Miro board, Figma file, prototype, dashboard, document, and recording you encountered — whether the requester named it, you found it in Notion, or you spotted it in a Slack message. Whether you could open it is irrelevant to whether it belongs in the brief.
+
+- **You could read it:** inspect the content, use it in the next question, and reflect it in the brief.
+- **You could not read it:** record the link anyway and mark it plainly, for example *(nicht geöffnet — kein Zugriff)*. A link you could not evaluate is still valuable to the researcher who picks the ticket up later.
+
+The researcher who takes the study over should never have to rediscover material that was already visible during intake. Dropping a link because you could not open it is the one failure mode that costs real time later, and it is invisible to everyone except the person who eventually needs it.
 
 **A board is not a finding.** Workshop output, assumption maps, journey maps, and brainstorming boards typically capture stakeholder assumptions, not user data. Treating them as "we already know this" deletes exactly the question that needed investigating. When you evaluate such a source, establish what it rests on — collected user data or team opinion. Team opinion falls under the existing rule in "UXR Roadmap Brief-Ready Summary": it is never recorded as what is already known about users unless it is labelled as stakeholder evidence. Labelled that way, it does not reduce the `Confidence Gap` score in STEP 5d.
 
@@ -397,7 +424,7 @@ Say which properties you set when you return the link, so the requester can corr
 
 `Growth`, `Core Product`, `Backend`, `Excellence`, `Community`, `Course Experience`, `Course Discovery`, `Email Capture`, `Instructor Acquisition`, `Instructor Marketing`, `Other`, `M20 Hardware`, `Fitness Hub`, `Genius`, `Insights sharing`, `Recruitment`, `Segmentation research`, `Business Suite`, `Product Evaluation`, `Motivation`, `Smart Strength`, `Open Mode`, `Guest Mode`, `Workout Experience`, `Wellpass`, `OX`, `Recharge`, `Trainer Experience`, `Hardware`, `Pilot`, `Market Research`, `Smart Cardio`, `Nexus`, `JTBD`, `BMA`, `MMS`, `UXR  Ops`, `UXR Repository`, `Trainer App`, `Company Portal`, `Confidential`, `Access experience`
 
-Tag `Confidential` whenever the topic involves unreleased strategy, legal matters, or personal data beyond ordinary product usage.
+Never set `Confidential` on your own initiative. It changes who can see the ticket, and a wrongly restricted ticket quietly cuts stakeholders out of their own project. Set it only when the requester explicitly asks for it. If a topic looks sensitive — unreleased strategy, M&A, legal matters, personal data beyond ordinary product usage — mention that in the conversation and let the requester decide, rather than tagging it yourself.
 
 **Both modes**
 
@@ -1113,7 +1140,7 @@ Always fill this template in English, whatever language the conversation is in �
 [Needed-by date, milestones, dependencies]
 
 ## Additional input / material
-[Figma, Miro, analytics, supporting documents]
+[Every Figma, Miro, analytics, document, and recording link encountered during intake — from the requester, from Notion, or from Slack. Mark links you could not open rather than omitting them.]
 
 ## Research guidance
 **Recommended method:** [Recommendation]
@@ -1238,6 +1265,15 @@ This skill is built on principles from Erika Hall's "Just Enough Research":
 ---
 
 ## Version History
+
+**v0.7.3** (August 3, 2026)
+- Made Slack a first-class prior-research source alongside Notion, with concrete search patterns; searching the topic together with `miro` or `figma` reliably surfaces material nobody mentions
+- Broadened the Notion step beyond the UXR Roadmap to discovery pages, surveys, JTBD work, and strategy pages, with multi-query and bilingual search
+- Required that every Miro, Figma, dashboard, and document link encountered during intake is listed in the ticket, including links that could not be opened, marked as such
+- Required explicit statement of which sources were not searched, instead of silent gaps
+- Documented that NotebookLM has no API and cannot be queried by any assistant
+- Stopped setting the `Confidential` tag automatically; it changes ticket visibility, so it now requires an explicit request from the requester
+- Named Mixpanel explicitly in the active request for existing material, because "a dashboard" does not reliably bring product analytics to mind
 
 **v0.7.2** (August 3, 2026)
 - STEP 3 now asks actively for existing Miro boards, Figma files, prototypes, and dashboards instead of waiting for the requester to share a link, because prior in-house material is otherwise lost during intake
