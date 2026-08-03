@@ -1,7 +1,7 @@
 ---
 name: uxr-research-readiness-assistant
 description: Helps PMs and Designers sharpen a research question, choose an appropriate method, assess readiness, check prior studies, and route to the right next step, then writes the finished brief into a new or existing UXR Roadmap ticket in Notion. Gives a plain verdict on whether the requester can run the study themselves or needs a researcher, drafts the discussion guide or questionnaire, proposes a triage priority, and recommends workshops or other formats when a study is not the right instrument. Also triggers on requests like "UXR Intake for <Notion page URL>", "fill in this UXR request", "New UXR Request (with Agent)", "UX Research Brief", or a pasted Notion link from the UXR Roadmap database.
-version: 0.7.5
+version: 0.7.6
 last_updated: August 3, 2026
 ---
 
@@ -382,7 +382,7 @@ Use this when the requester already clicked "New" in the UXR Roadmap and gave yo
   - the grey "How to use" callout on older tickets,
   - the horizontal divider that separated them from the brief.
   Keep the `# UX Research Brief` heading.
-- Set the page icon to 🤖 and add the agent-generated callout — see "Marking the Ticket as Agent-Generated".
+- Set the page icon and add the agent-generated callout — see "Marking the Ticket as Agent-Generated".
 - Update the page properties as described in "Setting Database Properties" below.
 - Return the page link.
 
@@ -392,7 +392,7 @@ Use this when no existing page was referenced.
 
 - Create one new page in the UXR Roadmap data source: `collection://151d894d-d22a-815d-afc4-000b31967acd`.
 - Put the complete brief and research guidance in the page body.
-- Set the page icon to 🤖 and add the agent-generated callout — see "Marking the Ticket as Agent-Generated".
+- Set the page icon and add the agent-generated callout — see "Marking the Ticket as Agent-Generated".
 - Set the properties as described in "Setting Database Properties" below.
 - Return the new Notion page link.
 
@@ -400,11 +400,12 @@ Use this when no existing page was referenced.
 
 Every ticket this skill writes must be recognisable as agent-drafted at a glance — in the database list and inside the page. This is not decoration. A reader who mistakes an agent draft for a reviewed brief trusts the priority scores more than they have earned.
 
-- **Page icon:** set the page icon to 🤖. In the UXR Roadmap list view this is the fastest signal available, because triage sees it without opening anything. Set it in both modes, including when filling in a page the requester created from a template.
+- **Page icon:** set the page icon to the workspace custom emoji `:uxr-skill:`. In the UXR Roadmap list view this is the fastest signal available, because triage sees it without opening anything. Set it in both modes, including when filling in a page the requester created from a template.
+- **If Notion rejects `:uxr-skill:`** with "Custom emoji not found in this workspace", fall back to 🤖 and carry on. A missing icon must never block the ticket from being written, and there is no reason to raise it with the requester — it is housekeeping on the UXR side.
 - **First block in the page body**, directly above `# UX Research Brief`:
 
 ```markdown
-<callout icon="🤖" color="blue_bg">
+<callout icon="🤖" color="orange_bg">
 	**Drafted by the UXR Research Readiness Assistant.** This brief was written automatically from an intake conversation with the requester. Everything in it is a proposal: the priority scores, the recommended method, the ownership verdict, and any drafted study material are for UXR triage to confirm, adjust, or overwrite.
 </callout>
 ```
@@ -1125,7 +1126,7 @@ If information is missing, write **Open: [specific question]**. Do not invent an
 Always fill this template in English, whatever language the conversation is in — see "Language".
 
 ```markdown
-<callout icon="🤖" color="blue_bg">
+<callout icon="🤖" color="orange_bg">
 	**Drafted by the UXR Research Readiness Assistant.** This brief was written automatically from an intake conversation with the requester. Everything in it is a proposal: the priority scores, the recommended method, the ownership verdict, and any drafted study material are for UXR triage to confirm, adjust, or overwrite.
 </callout>
 
@@ -1311,6 +1312,11 @@ This skill is built on principles from Erika Hall's "Just Enough Research":
 ---
 
 ## Version History
+
+**v0.7.6** (August 3, 2026)
+- The page icon is now the workspace custom emoji `:uxr-skill:` rather than 🤖, so an agent-drafted ticket carries a mark that belongs to the UXR team rather than a generic one
+- Falls back to 🤖 when that emoji is missing, so the ticket still gets written and still gets marked
+- Callout recoloured from blue to orange to sit with it
 
 **v0.7.5** (August 3, 2026)
 - Every ticket is now marked as agent-generated: the page icon is set to 🤖 and a callout at the top of the body states that the brief was drafted automatically and that everything in it is a proposal
