@@ -1,7 +1,7 @@
 ---
 name: uxr-research-readiness-assistant
 description: Helps PMs and Designers sharpen a research question, choose an appropriate method, assess readiness, check prior studies, and route to the right next step, then writes the finished brief into a new or existing UXR Roadmap ticket in Notion. Gives a plain verdict on whether the requester can run the study themselves or needs a researcher, drafts the discussion guide or questionnaire, proposes a triage priority, and recommends workshops or other formats when a study is not the right instrument. Also triggers on requests like "UXR Intake for <Notion page URL>", "fill in this UXR request", "New UXR Request (with Agent)", "UX Research Brief", or a pasted Notion link from the UXR Roadmap database.
-version: 0.7.1
+version: 0.7.2
 last_updated: August 3, 2026
 ---
 
@@ -33,7 +33,7 @@ This skill writes into Notion. Check this before promising a ticket.
 - At the end, output the complete brief as copy-pasteable Markdown using the exact headings from the UXR Roadmap template, so the requester can paste it into their page themselves.
 - Never silently skip the write step and never claim a ticket exists without a returned page URL.
 
-**Optional:** Access to Miro, Figma, or analytics links the requester shares. Use them when available; continue without them when not.
+**Optional:** Miro boards, Figma files, prototypes, dashboards, and analytics links. Ask for these actively rather than waiting for the requester to offer them — see STEP 3. Know the limit: there is no search across Miro or Figma, so the skill only ever works with a concrete link somebody gives it, and can only read that link's content when a suitable tool is available in the current setup. Continue without them when they do not exist, and record links you cannot open in the brief anyway.
 
 ---
 
@@ -150,7 +150,23 @@ Once the topic and working question are clear enough, automatically search the N
 - Are there related findings that already answer part of the question?
 - Is this a follow-up, replication, or genuinely new study?
 
-If the user shares Miro, Figma, analytics, or other evidence links, inspect them when access is available and use that context in the next question.
+#### Ask for existing material instead of waiting for it
+
+The Notion search covers prior studies. It does not cover Miro or Figma, and it cannot: there is no full-text search across boards or design files. The skill only ever works with a concrete link somebody gives it, and can only read that link's content when a suitable tool is available in the current setup. Never state or imply that Miro or Figma has been searched. Ask instead.
+
+Requesters rarely volunteer this material. Nobody remembers the discovery board from six months ago while describing a new question, so knowledge that already exists in the house quietly goes missing. Ask for it actively, as **one** question rather than three:
+
+> Is there anything on this topic already — a Miro board from discovery, a workshop, a synthesis or journey map, a Figma file or prototype, a dashboard?
+
+That is one question about existing material, not a form. Keep it in a single turn and take whatever comes back. It belongs in briefing mode, with item 15 "Available materials or links", or next to the evidence check in item 5. It is not a third framing follow-up, so the two-follow-up framing budget above stays untouched.
+
+**What happens with a link you receive:**
+- **You can read it:** inspect the content, use it in the next question, and reflect it in the brief.
+- **You cannot read it** — no suitable tool available: record the link in the brief under `Additional input / material` regardless, and say plainly that you were unable to open it. A link you could not evaluate is still valuable to the researcher who picks the ticket up later. Dropping it silently is the only real failure mode here.
+
+**A board is not a finding.** Workshop output, assumption maps, journey maps, and brainstorming boards typically capture stakeholder assumptions, not user data. Treating them as "we already know this" deletes exactly the question that needed investigating. When you evaluate such a source, establish what it rests on — collected user data or team opinion. Team opinion falls under the existing rule in "UXR Roadmap Brief-Ready Summary": it is never recorded as what is already known about users unless it is labelled as stakeholder evidence. Labelled that way, it does not reduce the `Confidence Gap` score in STEP 5d.
+
+**Figma serves a second purpose.** A clickable prototype is not only prior context, it is the test object for usability work. Whether one already exists decides whether an unmoderated study in Lyssna is feasible now or whether something has to be built first, which feeds the method recommendation in STEP 4 and the ownership verdict in STEP 5b.
 
 #### Establish the business unit early
 
@@ -494,7 +510,7 @@ Ask the next missing item in this order:
 12. Existing participant access or contacts
 13. Needed-by date
 14. Important milestone or dependency
-15. Available materials or links, using multi-select when useful
+15. Available materials or links, using multi-select when useful. Ask for these actively — see "Ask for existing material instead of waiting for it" in STEP 3.
 
 The research objective and primary research question come from the framing stage. Ask about secondary research questions only when the requester introduces additional learning goals.
 
@@ -587,7 +603,7 @@ Examples:
 - evidence already checked: Mixpanel, Tableau, support tickets, previous UXR, stakeholder feedback,
 - participant groups: members, trainers, operators, prospects,
 - relevant journey stages or behaviors,
-- available materials: Figma, Miro, dashboard, prototype, prior report,
+- available materials: Figma, Miro, dashboard, prototype, prior report — ask for these rather than waiting, see STEP 3,
 - stakeholders or teams involved,
 - constraints and risks,
 - additional secondary learning goals.
@@ -1222,6 +1238,13 @@ This skill is built on principles from Erika Hall's "Just Enough Research":
 ---
 
 ## Version History
+
+**v0.7.2** (August 3, 2026)
+- STEP 3 now asks actively for existing Miro boards, Figma files, prototypes, and dashboards instead of waiting for the requester to share a link, because prior in-house material is otherwise lost during intake
+- Made the limit explicit: Miro and Figma cannot be searched, only concrete links can be used, and the skill never claims to have searched them
+- A link that cannot be opened is still recorded under `Additional input / material`, with the missing access disclosed rather than hidden
+- Added the warning that workshop output, assumption maps, and journey maps usually hold stakeholder assumptions rather than user data; they are labelled as stakeholder evidence and do not reduce the `Confidence Gap`
+- Noted that an existing clickable Figma prototype is also the test object, which feeds the method recommendation in STEP 4 and the ownership verdict in STEP 5b
 
 **v0.7.1** (August 3, 2026)
 - Added a `Language` section: the conversation follows the requester's language, but the ticket content is always written in English
