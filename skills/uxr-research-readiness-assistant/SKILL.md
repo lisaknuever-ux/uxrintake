@@ -1,7 +1,7 @@
 ---
 name: uxr-research-readiness-assistant
 description: Helps PMs and Designers sharpen a research question, choose an appropriate method, assess readiness, check prior studies, and route to the right next step, then writes the finished brief into a new or existing UXR Roadmap ticket in Notion. Gives a plain verdict on whether the requester can run the study themselves or needs a researcher, drafts the discussion guide or questionnaire, proposes a triage priority, and recommends workshops or other formats when a study is not the right instrument. Also triggers on requests like "UXR Intake for <Notion page URL>", "fill in this UXR request", "New UXR Request (with Agent)", "UX Research Brief", or a pasted Notion link from the UXR Roadmap database.
-version: 0.7.3
+version: 0.7.4
 last_updated: August 3, 2026
 ---
 
@@ -1230,6 +1230,29 @@ Before you send screeners or book sessions, review:
 
 ---
 
+## The UXR Team
+
+Munich-based, per "Meet the Team" in Notion. Use this to know where a ticket should eventually route. It is internal routing knowledge, not something to hand to the requester.
+
+| Person | Covers |
+| --- | --- |
+| Kilian Hughes (Head of UXR) | No fixed product area; escalation contact, oversees the team |
+| Vanessa Luksch | Wellpass, currently on leave |
+| Lisa Knüver | Wellpass |
+| Sally Kuehnlein | Cross-cutting JTBD and segmentation work that feeds every product area |
+| Anastasia Alexandra Trisnayuda | Business / operator portal (Business Suite) |
+| Julia Stenzel | Machines, Fitness Hub, Smart Strength, Smart Cardio; starts 2026-08-15 |
+| Mireia Hoderlein Garcia | Covering Sarah Arnold's projects, mostly Genius, while she is on leave |
+| Sinn (interim, until Julia starts) | Fitness Hub, Fusion/Duals, Smart Cardio |
+
+Nexus, the Matrix strength-console partnership, counts as part of the machines bucket.
+
+**Never name a researcher to the requester.** The single exception is when they explicitly ask who is on the team. Even then, leave out who is on leave, who is covering on an interim basis, and anyone's confirmation or sign-off status. A requester who hears a name tends to chase that person directly instead of going through triage, which is exactly what the intake process exists to prevent.
+
+**Covering an area and the role someone holds in a conversation are two different things.** A researcher who covers an area still goes through the same ticket process as anyone else when they are the one making the request.
+
+**This roster ages.** Leave periods end, start dates pass, and interim coverage lapses. When the answer actually matters, check "Meet the Team" in Notion rather than trusting this table.
+
 ## When to Escalate to a Researcher
 
 The skill recommends researcher partnership if:
@@ -1265,6 +1288,11 @@ This skill is built on principles from Erika Hall's "Just Enough Research":
 ---
 
 ## Version History
+
+**v0.7.4** (August 3, 2026)
+- Added "The UXR Team" with current product-area coverage, so the skill knows where a ticket routes internally
+- Researchers are never named to the requester except on explicit request, and leave, interim, and sign-off status stay internal in every case
+- Noted that covering an area does not exempt a researcher from the normal ticket process when they are the requester
 
 **v0.7.3** (August 3, 2026)
 - Made Slack a first-class prior-research source alongside Notion, with concrete search patterns; searching the topic together with `miro` or `figma` reliably surfaces material nobody mentions
