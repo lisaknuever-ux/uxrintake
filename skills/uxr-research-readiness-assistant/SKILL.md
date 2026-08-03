@@ -52,7 +52,7 @@ Two rules, and they are independent of each other.
 
 ---
 
-### Mandatory Intake Behavior
+## Mandatory Intake Behavior
 
 When a user wants to create a UXR Roadmap request:
 - Do not create an empty or lightly populated ticket first.
