@@ -21,6 +21,7 @@ or whether their study counts as foundational or operational. That is the assist
 | **Improves the question out loud** | It reflects back what it understood, names the assumptions baked into the wording, and offers a stronger version. |
 | **Checks what we already know** | Searches the Notion research repository before recommending new research. The cheapest study is the one you don't have to run. |
 | **Recommends method and rigor** | Method, sample, tool, bias risks, and the EGYM research classification — operational (self-serve) vs. foundational (researcher partnership required). |
+| **Hands Lyssna studies over** | When Lyssna is the right tool, it writes a build sheet in Lyssna's own vocabulary plus a paste-ready prompt for a browser agent, so nobody retypes the study. |
 | **Writes the ticket** | Fills an existing UXR Roadmap page or creates a new one, keeping the brief headings UXR reviewers expect. |
 | **Knows when to escalate** | Foundational, sensitive, or high-risk work gets routed to a human researcher with a strong brief attached. |
 
