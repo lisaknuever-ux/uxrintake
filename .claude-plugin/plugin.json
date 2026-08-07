@@ -1,7 +1,7 @@
 {
   "name": "uxr-intake",
   "description": "Guided UX research intake. Sharpens a research question, recommends a rigorous method, checks prior studies, and writes the finished brief into the UXR Roadmap in Notion.",
-  "version": "1.3.0",
+  "version": "1.5.0",
   "author": {
     "name": "Lisa Knüver",
     "url": "https://github.com/lisaknuever-ux"

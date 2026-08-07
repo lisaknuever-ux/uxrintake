@@ -5,7 +5,7 @@ type: skill
 blt_area: CPO
 team: Product Design - Wellpass
 department: Product Management
-version: 1.3.0
+version: 1.5.0
 owner_email: lisa.knuever@egym.com
 share_scope: everyone
 ---
@@ -38,9 +38,11 @@ This skill writes into Notion. Check this before promising a ticket.
 - At the end, output the complete brief as copy-pasteable Markdown using the exact headings from the UXR Roadmap template, so the requester can paste it into their page themselves.
 - Never silently skip the write step and never claim a ticket exists without a returned page URL.
 
-**Strongly recommended:** A connected Slack integration. Much of EGYM's usable prior knowledge appears in Slack before it is ever written up, and Slack is also the fastest way to discover Miro and Figma links nobody would think to mention. Search it as a matter of course during the prior-research step. When Slack access is missing, say so and name what that leaves unchecked.
+**Strongly recommended:** A connected Slack integration. Much of EGYM's usable prior knowledge appears in Slack before it is ever written up, and Slack is also the fastest way to discover Miro and Figma links nobody would think to mention. Search it as a matter of course during the prior-research step. It is also how STEP 5d requests a Lyssna seat for a requester who does not have one yet. When Slack access is missing, say so and name what that leaves unchecked.
 
 **Optional:** Miro boards, Figma files, prototypes, dashboards, and analytics links. Ask for these actively rather than waiting for the requester to offer them — see STEP 3. Know the limit: there is no search across Miro or Figma, so the skill only ever works with a concrete link somebody gives it, and can only read that link's content when a suitable tool is available in the current setup. An official Miro MCP server exists and can be connected; the Figma MCP is subject to EGYM IT policy. Continue without them when they do not exist, and record links you cannot open in the brief anyway.
+
+**Optional:** A connected browser-automation tool, typically a Playwright MCP server, signed in to Lyssna in its browser profile. This is what makes STEP 5d Option C possible — building the study draft directly instead of only describing it. Lyssna has no API, so browser control is the only route, and it is genuinely optional: the build sheet and the browser-agent prompt work without it. Check whether the tool exists before offering to build anything.
 
 **Not available anywhere:** NotebookLM has no public API. No assistant can query it. Ask the requester to paste the relevant summary instead of promising a search.
 
@@ -393,9 +395,38 @@ A draft questionnaire in a Notion ticket is still a document. Somebody has to re
 
 **When this step applies.** The recommended tool is Lyssna (see "EGYM Tool Selection") and the ownership verdict is Self-serve or UXR sparring. Skip it entirely for moderated work, for Maze, for workshops, and when the verdict is UXR-Led — the researcher builds those themselves.
 
-**Be straight about what is and is not automatic.** Lyssna has no public API, no file import, and no way to create a study from outside the web app. Its MCP server is read-only and only reads existing results. So this skill cannot create the study for anyone, and must never imply that it did. What it can do is remove almost all of the typing. Offer both of these, and let the requester pick either, both, or neither:
+**Ask about access first.** Before writing anything for Lyssna, ask one question:
 
-> Two ways to get this into Lyssna without retyping it. I can write a **build sheet** — your study spelled out section by section in Lyssna's own vocabulary, so building it is copying, not designing. Or I can write a **browser-agent prompt** you paste into Claude for Chrome with Lyssna open, and it fills the builder for you. Want one, both, or neither?
+> Do you already have a Lyssna account? If not, that is a two-minute fix — I can request one for you.
+
+Access is not a gate at EGYM and must never be presented as one. Anyone who needs a Lyssna seat gets one; Lisa Knüver and Vanessa Luksch add people directly. So keep recommending Lyssna on the merits of the method, never hedge the recommendation because someone might not have access yet, and never let a missing account redirect the study to a weaker method.
+
+**If they have access:** carry on to the routes below.
+
+**If they do not:** offer to request it, and do it in the same breath rather than leaving them with a task.
+
+- Ask for the email address their account should use — usually their EGYM address. Ask once; do not guess it from context.
+- Send a Slack DM to **both** Lisa Knüver (`U0AJST9UTGQ`) and Vanessa Luksch (`U09BQGJJWLB`), so whoever is available first can action it. Two separate DMs, each mentioning that the other was also notified, so nobody adds the same person twice.
+- Keep the message short and complete enough to act on without a follow-up question: who needs access, which email, what they intend to run, and a link to the ticket if one exists by now.
+
+  > **Lyssna access request** — [Name] needs a Lyssna seat.
+  > Email: [email]
+  > For: [one line on the planned study]
+  > Ticket: [Notion link, if it exists]
+  > *Sent automatically by the UXR Intake Assistant. Vanessa/Lisa was notified too — whoever gets there first.*
+
+- Confirm to the requester what was sent and to whom, so they know it is handled and can chase it themselves if it goes quiet.
+- **If Slack is not available in the current setup**, do not fail silently and do not pretend the request was sent. Say so, and give them the message as copy-pasteable text with both names, so the request still takes them ten seconds.
+
+Then continue. A missing account does not stop the build sheet from being written — the study can be specified now and built the moment the seat exists. Note in the ticket that access was requested and is pending, so a reviewer knows why nothing has been built yet.
+
+**Be straight about what is and is not automatic.** Lyssna has no public API, no file import, and no way to create a study from outside the web app. Its MCP server is read-only and only reads existing results. Every route below therefore ends in the same place: somebody, or something, operating the Lyssna web UI. Never imply that a study was created through an integration, and never claim a study exists until it has been seen in the builder.
+
+What differs is who does the typing. Offer the routes that are actually available in the current setup, and let the requester pick one, several, or none:
+
+> Three ways to get this into Lyssna without retyping it. I can write a **build sheet** — your study spelled out section by section in Lyssna's own vocabulary, so building it is copying, not designing. I can write a **browser-agent prompt** you paste into Claude for Chrome with Lyssna open. Or, if browser control is available here, **I build the draft in Lyssna myself** while you watch. What would you like?
+
+Check before you offer Option C. It requires a browser-automation tool in the current setup — a Playwright MCP server or equivalent. When no such tool is connected, do not offer it and do not describe it as something that could happen; offer A and B and, if it is worth it for this requester, mention that direct building can be set up.
 
 **Option A — the Lyssna build sheet**
 
@@ -457,7 +488,36 @@ Produce a single fenced block the requester copies into the browser agent while 
 
 Tell the requester the honest caveat alongside it: a browser agent gets the scaffolding and the plain question text right, and it gets logic, randomisation, and asset uploads wrong often enough that the draft always needs a read-through before launch. It saves the typing, not the reviewing.
 
-**What goes in the ticket.** Both artefacts belong under "Suggested study material" in the ticket body, inside a collapsed toggle so they do not bury the brief for a reviewer who only wants the request. The build sheet stays readable as text; put the browser-agent prompt in a code block so it can be copied in one click. If the requester declines both, write nothing extra — an unread build sheet in a ticket is noise.
+**Option C — build the draft in Lyssna directly**
+
+Available only when a browser-automation tool is connected in the current setup. This is the same mechanism as Option B, with one difference: the agent doing the clicking is this one, so the build sheet never has to leave the conversation and mistakes get corrected in the moment rather than reported afterwards.
+
+Requirements, checked before promising anything:
+
+- A browser-automation tool is available — typically a Playwright MCP server. If it is not, this option does not exist; do not stall the conversation trying to make it appear.
+- The browser profile is signed in to Lyssna. Lyssna cannot be scripted anonymously. If the session lands on `app.lyssna.com/users/sign_in`, stop and ask the requester to sign in once in that browser profile, then continue. Never ask for, type, or store their credentials — they log in themselves.
+- Only one process may use a browser profile at a time. If the profile is already open elsewhere, close that first.
+
+How to build, in order:
+
+1. **Produce the build sheet first** and show it. It is the specification the build follows and the record of what was intended. Never start clicking from an unwritten plan.
+2. Open the Lyssna study builder and create the study **as a draft**.
+3. Work through the build sheet in its own order: name, screener questions, then each section with its instructions, asset, settings, and follow-up questions, then logic.
+4. Enter all participant-facing text **verbatim**. Wording was chosen to avoid leading the participant; improving it silently damages the study.
+5. Leave anything that cannot be set as specified at its default and **collect it in a list** rather than substituting something close.
+
+Hard limits, which are not negotiable and not subject to requester enthusiasm:
+
+- **Never publish, launch, or share the study.** It stays a draft.
+- **Never order panel responses.** That spends real credits. Recruitment is always the requester's own action, taken deliberately.
+- **Never change or delete an existing study.** If a study with the same name already exists, stop and ask.
+- **Never touch account, billing, team, or licence settings.**
+
+When the build finishes, report in plain terms: the link to the draft, what was created, what could not be set and why, and what needs a human eye before launch. Then say the part that matters most — an automated build is a first pass, not a reviewed instrument. The requester opens it, reads every question, runs the preview end to end, and only then decides whether it is ready. The readiness checklist still applies in full.
+
+If the build fails partway, say where it stopped and what exists in Lyssna already, so nobody goes looking for a study that was never finished or builds a second copy of one that was.
+
+**What goes in the ticket.** The build sheet belongs under "Suggested study material" in the ticket body, inside a collapsed toggle so it does not bury the brief for a reviewer who only wants the request. Keep it readable as text; put the browser-agent prompt in a code block so it can be copied in one click. When a draft was built directly, add the Lyssna link and note that it is an unreviewed draft. If the requester declined every route, write nothing extra — an unread build sheet in a ticket is noise.
 
 ### STEP 5e: Propose a Priority
 
@@ -924,7 +984,7 @@ Choose the method first, then recommend the tool. A tool is an execution environ
 | Need | Preferred tool or setup | Access and fit |
 |---|---|---|
 | Product usage, funnels, drop-offs, cohorts | Mixpanel or the relevant product analytics source | Use before new research for descriptive behavior. Pair with qualitative evidence when the question asks why. |
-| Self-serve unmoderated prototype, first-click, five-second, preference, card sort, tree test, or quick survey | Lyssna | Available for stakeholder self-serve with an Editor licence. Best for concrete designs, clarity, findability, and task performance. Not suited to deep discovery or complex motivations. When Lyssna is the recommendation, go on to STEP 5d and hand the study over in a form that can be built without retyping it. |
+| Self-serve unmoderated prototype, first-click, five-second, preference, card sort, tree test, or quick survey | Lyssna | Available for stakeholder self-serve. Best for concrete designs, clarity, findability, and task performance. Not suited to deep discovery or complex motivations. Access is not a constraint — anyone who needs a seat gets one from Lisa or Vanessa, so recommend it on the merits and sort access out in STEP 5d. |
 | UXR-led quantitative prototype test, website test, card sort, five-second test, or survey with richer logic | Maze | Reserved for internal UX Researchers because licences are limited. Recommend only with UXR ownership or explicit access confirmation. Tree testing, moderated interviews, and some advanced features are not available on the current plan. |
 | Deep motivations, mental models, complex workflows, sensitive topics | Moderated interviews or contextual sessions using the relevant interview guide | Do not force these into an unmoderated platform. Use recording, consent, and structured analysis practices. |
 | Lightweight internal pulse or stakeholder evidence | Existing internal survey or feedback channel | Label as internal or stakeholder evidence. Do not present it as external user validation. |
@@ -1398,6 +1458,8 @@ Nexus, the Matrix strength-console partnership, counts as part of the machines b
 
 **Never name a researcher to the requester.** The single exception is when they explicitly ask who is on the team. Even then, leave out who is on leave, who is covering on an interim basis, and anyone's confirmation or sign-off status. A requester who hears a name tends to chase that person directly instead of going through triage, which is exactly what the intake process exists to prevent.
 
+**Lyssna access is the one administrative exception.** STEP 5d names Lisa and Vanessa as the people who add Lyssna seats, and notifies them directly. That does not conflict with the rule above, because it routes a two-minute account task, not a research request. Keep the two apart: never let an access conversation turn into "ask Lisa about your study". Whether a study gets a researcher is still decided by triage on the ticket, and Vanessa can add a seat while not taking new research requests.
+
 **Covering an area and the role someone holds in a conversation are two different things.** A researcher who covers an area still goes through the same ticket process as anyone else when they are the one making the request.
 
 **Absence reasons are deliberately not recorded here.** Whether someone is on leave, and why, is their business and nobody needs it to route a ticket. Knowing that a person is not currently taking requests is enough.
@@ -1439,6 +1501,21 @@ This skill is built on principles from Erika Hall's "Just Enough Research":
 ---
 
 ## Version History
+
+**v1.5.0** (August 7, 2026)
+- STEP 5d now asks whether the requester already has Lyssna access, and requests a seat for them when they do not — a Slack DM to Lisa Knüver and Vanessa Luksch with the email address and what they plan to run, so the requester is not left with a task
+- Access is explicitly not a gate: the recommendation is made on the merits of the method, and a missing account never redirects a study to a weaker one
+- The build sheet is still written while access is pending, and the ticket records that a seat was requested
+- Falls back to copy-pasteable text when Slack is unavailable, rather than silently skipping the request or claiming it was sent
+- Resolved the tension with "never name a researcher": naming Lisa and Vanessa routes an account task, not a research request, and triage still decides everything else
+- Dropped the "Editor licence" caveat from the tool table, which described a constraint that does not exist in practice
+
+**v1.4.0** (August 7, 2026)
+- STEP 5d gains Option C: with a browser-automation tool connected, the assistant builds the Lyssna study draft itself rather than only writing a spec for someone else to type
+- Hard limits on that build: draft only, never publish, never order panel responses, never spend credits, never modify an existing study, never touch account or billing settings
+- Requires a signed-in browser profile; the assistant never asks for, types, or stores credentials, and stops to let the requester sign in themselves
+- The route is offered only when the tool actually exists in the current setup, so the skill never promises a capability it does not have
+- Every route still ends in the Lyssna web UI — the skill states plainly that an automated build is an unreviewed first pass, not a launch-ready instrument
 
 **v1.3.0** (August 7, 2026)
 - Added STEP 5d: when the recommendation is Lyssna, the study is handed over in a form that can be built without retyping it — a build sheet written in Lyssna's own section and question vocabulary, and a paste-ready prompt for a browser agent such as Claude for Chrome

@@ -22,6 +22,8 @@ or whether their study counts as foundational or operational. That is the assist
 | **Checks what we already know** | Searches the Notion research repository before recommending new research. The cheapest study is the one you don't have to run. |
 | **Recommends method and rigor** | Method, sample, tool, bias risks, and the EGYM research classification — operational (self-serve) vs. foundational (researcher partnership required). |
 | **Hands Lyssna studies over** | When Lyssna is the right tool, it writes a build sheet in Lyssna's own vocabulary plus a paste-ready prompt for a browser agent, so nobody retypes the study. |
+| **Sorts out Lyssna access** | It asks whether you already have a seat and, if you don't, requests one for you — a Slack DM to Lisa and Vanessa with your email and what you plan to run. Access is never a reason to recommend a weaker method. |
+| **Builds the study, not just the spec** | With browser automation connected, it builds the Lyssna draft itself while you watch. Draft only — it never publishes and never orders panel responses. |
 | **Writes the ticket** | Fills an existing UXR Roadmap page or creates a new one, keeping the brief headings UXR reviewers expect. |
 | **Knows when to escalate** | Foundational, sensitive, or high-risk work gets routed to a human researcher with a strong brief attached. |
 
@@ -149,6 +151,70 @@ with the same command; your authorisation is remembered.
 The assistant still runs the full intake conversation and hands you the finished brief as
 copy-pasteable Markdown. It tells you up front that it cannot write the ticket rather than
 pretending it did.
+
+---
+
+## Optional: browser automation for Lyssna
+
+Everything above works without this. Skip the section unless you specifically want the
+assistant to build Lyssna drafts for you.
+
+**Why it is opt-in and deliberately not bundled with the plugin.** Lyssna has no public
+API, no import, and a read-only MCP server, so driving the web UI is the only way to
+create a study from outside it. That means handing the assistant a remote-controllable
+browser — one that reads web content and is therefore exposed to prompt injection from
+whatever it loads. That is a reasonable trade for someone who wants it and knows why.
+It is not something that belongs in every installation by default, so the plugin does
+not ship it.
+
+### Setup
+
+Add a Playwright MCP server to `~/.copilot/mcp-config.json`:
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "-y", "@playwright/mcp@latest",
+        "--browser", "chrome",
+        "--user-data-dir", "/Users/you/.copilot-browser-profile"
+      ],
+      "tools": ["*"]
+    }
+  }
+}
+```
+
+**Use a separate browser profile.** Point `--user-data-dir` at a directory that exists
+only for this, not at your everyday Chrome profile. The agent gets whatever that profile
+is signed into, so keep that surface small. Note that a profile can only be open in one
+process at a time — close the automated browser before opening the same profile yourself.
+
+**Log in to Lyssna once** in that profile and leave it signed in. The assistant never
+asks for your credentials, never types them, and never stores them. If it lands on the
+sign-in page it stops and asks you to log in yourself.
+
+### What the assistant will and will not do
+
+- **Draft only.** It never publishes, launches, or shares a study.
+- **Never orders panel responses.** That spends real credits, so recruitment stays your
+  own deliberate action.
+- **Never modifies or deletes an existing study.** If one already has the same name, it
+  stops and asks.
+- **Never touches account, billing, team, or licence settings.**
+
+It reports the draft link, anything it could not set, and what needs a human eye. An
+automated build is an unreviewed first pass — you still read every question and run the
+preview before launch.
+
+### Without it
+
+Nothing breaks. The build sheet and the browser-agent prompt are the normal path; direct
+building is the exception. The assistant checks whether the tool is connected and simply
+does not offer what it cannot do.
 
 ---
 
