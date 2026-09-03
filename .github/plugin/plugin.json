@@ -1,7 +1,7 @@
 {
   "name": "uxr-intake",
-  "description": "Guided UX research intake for EGYM. Sharpens a research question, recommends a rigorous method, checks prior studies, drafts the study itself, hands Lyssna studies over as a ready-to-build sheet or a browser-agent prompt, runs a heuristic evaluation when an expert review is the smarter first step, and writes the finished brief into the UXR Roadmap in Notion.",
-  "version": "1.11.0",
+  "description": "Guided UX research intake for EGYM. Opens with a menu so you can choose what you want out of it: sharpen and challenge your question, find out what research already exists, have an interface reviewed, or get a finished ticket — and stop after any block once you have what you need. Sharpens a research question, recommends a rigorous method, checks prior studies, drafts the study itself, hands Lyssna studies over as a ready-to-build sheet or a browser-agent prompt, runs a heuristic evaluation when an expert review is the smarter first step, and writes the finished brief into the UXR Roadmap in Notion.",
+  "version": "1.12.0",
   "author": {
     "name": "Lisa Knüver",
     "url": "https://github.com/lisaknuever-ux"
