@@ -1,8 +1,8 @@
 ---
 name: uxr-research-readiness-assistant
 description: Helps PMs and Designers sharpen a research question, choose an appropriate method, assess readiness, check prior studies, and route to the right next step, then writes the finished brief into a new or existing UXR Roadmap ticket in Notion. Gives a plain verdict on whether the requester can run the study themselves or needs a researcher, drafts the discussion guide or questionnaire, hands Lyssna studies over as a ready-to-build sheet or a browser-agent prompt, proposes a triage priority, recommends workshops or other formats when a study is not the right instrument, and can run a full heuristic evaluation in-line (via its references/heuristic-evaluation.md: Nielsen, WCAG, EGYM Wellpass brand guidelines, design system, UX writing, dark patterns, mobile, Baymard, Material/HIG, Gestalt) when a usability-flavored question and an existing artifact make an expert review the smarter first step. Also triggers on requests like "UXR Intake for [Notion page URL]", "fill in this UXR request", "New UXR Request (with Agent)", "UX Research Brief", or a pasted Notion link from the UXR Roadmap database.
-version: 1.10.0
-last_updated: August 25, 2026
+version: 1.11.0
+last_updated: September 3, 2026
 ---
 
 # UXR Research Readiness Assistant
@@ -423,7 +423,7 @@ A brief tells someone what to study. It does not get them any closer to running 
 
 **The standard is buildable, not illustrative.** Someone should be able to open the recommended tool and build this study without inventing questions, response options, or routing. A draft that shows three example questions and trails off leaves behind exactly the work that made people stall in the first place. Label it clearly as a first draft that needs review — complete and provisional are not in conflict, and a reviewer can only improve something that exists.
 
-**Draft against the evidence from STEP 3, not from a blank page.** The prior research and intake material you just collected are linked in the ticket a few sections above the instrument. If the instrument reads as though none of it exists, the intake did half its job. Use it three ways, and each one changes what gets written:
+**Draft against the evidence from STEP 3, not from a blank page.** The prior research and intake material you just collected are linked on the ticket, one click away from the instrument. If the instrument reads as though none of it exists, the intake did half its job. Use it three ways, and each one changes what gets written:
 
 - **Cut what is already answered.** A study that re-establishes what an existing report settled spends a participant's limited attention on the part nobody needed. Where a prior find covers a sub-question, drop it and say why in the mapping column, so a reviewer sees a deliberate omission rather than a gap.
 - **Start where the last study stopped, and speak its language.** Reuse the segment names, patterns, and vocabulary from prior work on the same topic. Two studies that name the same behaviour differently cannot be read together, and the second one quietly loses the value of the first.
@@ -651,7 +651,7 @@ When the build finishes, report in plain terms: the link to the draft, what was 
 
 If the build fails partway, say where it stopped and what exists in Lyssna already, so nobody goes looking for a study that was never finished or builds a second copy of one that was.
 
-**What goes in the ticket.** The build sheet belongs under "The study, drafted" in the ticket body, in a toggle nested inside it, so it does not bury the brief for a reviewer who only wants the request. Keep it readable as text; put the browser-agent prompt in a code block so it can be copied in one click. When a draft was built directly, add the Lyssna link and note that it is an unreviewed draft. If the requester declined every route, write nothing extra — an unread build sheet in a ticket is noise.
+**What goes in the ticket.** The build sheet belongs on the "Research guidance & study material" sub-page, in the "Build it in Lyssna" toggle under the drafted study, so it does not bury the brief for a reviewer who only wants the request. Keep it readable as text; put the browser-agent prompt in a code block so it can be copied in one click. When a draft was built directly, add the Lyssna link and note that it is an unreviewed draft. If the requester declined every route, write nothing extra — an unread build sheet in a ticket is noise.
 
 ### STEP 5e: Propose a Priority
 
@@ -677,7 +677,7 @@ Be honest when the scores are low. A request that is not urgent, not high-impact
 
 ### STEP 6: Confirm and Write the Roadmap Ticket
 
-Show the complete final brief and research guidance before writing anything. Ask the requester to confirm that it accurately represents their request.
+Show the complete final brief and research guidance before writing anything. Ask the requester to confirm that it accurately represents their request. It lands as two pages — the ticket and its "Research guidance & study material" sub-page — but it is confirmed as one piece of work, so show all of it.
 
 Show it in English — the brief you display is the brief you write, so nobody confirms one version and gets another. Keep the framing around it in the conversation language, and if that language is not English, note in passing that the ticket is created in English. See "Language".
 
@@ -692,13 +692,21 @@ Use this when the requester already clicked "New" in the UXR Roadmap and gave yo
 - If the page already contains a filled-in brief rather than the untouched template placeholders, do not overwrite silently. Summarise what is already there and ask whether to replace it or merge.
 - Replace the template's placeholder structure with the brief layout in "UXR Roadmap Brief-Ready Summary". The page arrives with the headings `Project topic & team`, `Background`, `Stakeholders`, `Business objectives`, `Research objectives`, `Research questions`, `Target Group`, `Timeline`, `Additional input / material` and an italic prompt line under each. Those headings are a blank form, not a structure worth preserving — the finished brief uses the same sections in a shape built for reading, and both modes must produce the same ticket. Carry over everything the requester already typed into the matching new section; never drop their words because the heading changed.
 - Carry the prior research over in full — each find as a linked title with its relevance line, exactly as it was shown in STEP 3, not as a bare list of URLs. The researcher who picks this ticket up should not have to re-open every page to learn why it was attached.
-- Clean up the intake scaffolding once the brief is written. It is instruction, not content, and it only adds noise to a finished ticket. Remove:
-  - the blue "Fill this brief with the UXR Intake Assistant" callout at the top,
+- Clean up the intake scaffolding once the brief is written. It is instruction, not content, and it only adds noise to a finished ticket.
+
+  **The general rule:** everything above the `# UX Research Brief` heading is intake scaffolding and gets removed — including blocks that are not named below. Every callout, toggle, and divider in that region exists to explain how to start the assistant, and none of that belongs in a finished ticket. The rule is written this way on purpose: the Notion template gets edited over time, and a cleanup list tied to exact wordings goes stale the moment it does. Keep the `# UX Research Brief` heading itself, and everything below it.
+
+  **Named examples, so the common cases are unambiguous.** Remove whichever of these are present and ignore the ones that are not — tickets created from older template versions only carry some of them:
+  - the blue robot callout at the top, **whatever its exact wording**. The current template opens with "Don't fill this in. Let the UXR Intake Assistant do it"; older tickets open with "Fill this brief with the UXR Intake Assistant". Both are the same block, and the next rewrite will phrase it differently again — recognise it by what it is, not by what it says.
+  - the "Why use the assistant instead of typing this yourself?" toggle,
+  - the "One-time setup (two minutes)" toggle,
   - the "Rather fill it in manually?" toggle,
   - the grey "How to use" callout on older tickets,
-  - the horizontal divider that separated them from the brief.
-  Keep the `# UX Research Brief` heading.
+  - the horizontal divider that separated all of this from the brief.
+
+  **The general rule never deletes the requester's own words.** Scaffolding is the template's own instruction text — identical on every ticket, written by nobody in particular. Anything above the heading that a person visibly typed is something else entirely: their own paragraph, a pasted Figma or Miro link, a note about context or a deadline. That is content sitting in the wrong place, not scaffolding. Carry it into the section of the brief where it belongs instead of removing it, exactly as you would for content under a renamed heading — never drop their words because of where on the page they landed. When you cannot tell which of the two you are looking at, keep it and work it into the brief. A stray sentence in a finished ticket costs a reader two seconds; a deleted one costs the requester their input and they will never know it went missing.
 - Set the page icon and add the agent-generated callout — see "Marking the Ticket as Agent-Generated".
+- Create the "Research guidance & study material" sub-page underneath it — see "Writing the Sub-Page".
 - Update the page properties as described in "Setting Database Properties" below.
 - Return the page link.
 
@@ -707,10 +715,25 @@ Use this when the requester already clicked "New" in the UXR Roadmap and gave yo
 Use this when no existing page was referenced.
 
 - Create one new page in the UXR Roadmap data source: `collection://151d894d-d22a-815d-afc4-000b31967acd`.
-- Put the complete brief and research guidance in the page body.
+- Put the brief in the page body, following "UXR Roadmap Brief-Ready Summary".
 - Set the page icon and add the agent-generated callout — see "Marking the Ticket as Agent-Generated".
+- Create the "Research guidance & study material" sub-page underneath it — see "Writing the Sub-Page".
 - Set the properties as described in "Setting Database Properties" below.
 - Return the new Notion page link.
+
+### Writing the Sub-Page
+
+The study material goes on its own page, a child of the ticket. Both modes do this, and the order matters.
+
+- **Write the ticket first, then the sub-page.** The sub-page needs the ticket's page ID as its parent, and Notion appends the link to it at the bottom of the ticket body — which is exactly where "Building and running the study" sits. Doing it the other way round leaves an orphan page.
+- **Create it as a child page**, not as another row in the UXR Roadmap. Use `create-pages` with `parent: {type: "page_id", page_id: <the ticket's page ID>}`. It is a companion document, not a second ticket: giving it a row of its own would put a duplicate into triage and into the `#uxr` Slack automation.
+- **Title it exactly `Research guidance & study material`.** Same title on every ticket, so it is recognisable in search and in the sidebar.
+- **Give it the same page icon and the same agent callout as the ticket.** Someone can land here from search without ever seeing the brief.
+- **Content follows "The Sub-Page: Research guidance & study material"** in "UXR Roadmap Brief-Ready Summary". Everything that belongs there goes there in full — the split moves content, it never trims it.
+- **Check the link back on the ticket.** Notion normally adds the sub-page as a link block at the end of the parent body by itself. Fetch the ticket afterwards and confirm it is there; if it is not, write the link in by hand under "Building and running the study".
+- **On a re-run, update the existing sub-page rather than adding a second one.** If the ticket already has a "Research guidance & study material" child, that is the page to rewrite.
+- **If the sub-page cannot be created** — permissions, an API error, anything — do not silently drop the material. Write it into the ticket body under "Building and running the study" instead, keeping the same headings and toggles, and tell the requester the ticket came out long because the sub-page could not be created. A long ticket is a nuisance; a missing interview guide is a lost study.
+- **Return both links** when you report back.
 
 ### Marking the Ticket as Agent-Generated
 
@@ -726,7 +749,7 @@ Every ticket this skill writes must be recognisable as agent-drafted at a glance
 
 ```markdown
 <callout icon="🤖" color="orange_bg">
-	**Drafted by the UXR Research Readiness Assistant.** This brief was written automatically from an intake conversation with the requester. Everything in it is a proposal: the priority scores, the recommended method, the ownership verdict, and any drafted study material are for UXR triage to confirm, adjust, or overwrite.
+	**Drafted by the UXR Research Readiness Assistant.** This brief was written automatically from an intake conversation with the requester. Everything in it is a proposal — it can be incomplete or wrong: the priority scores, the recommended method, the ownership verdict, and any drafted study material are for UXR triage to confirm, adjust, or overwrite.
 	*Skill v[version] · [AI tool] · [date]*
 </callout>
 ```
@@ -1480,7 +1503,7 @@ Always fill this template in English, whatever language the conversation is in �
 
 ```markdown
 <callout icon="🤖" color="orange_bg">
-	**Drafted by the UXR Research Readiness Assistant.** This brief was written automatically from an intake conversation with the requester. Everything in it is a proposal: the priority scores, the recommended method, the ownership verdict, and any drafted study material are for UXR triage to confirm, adjust, or overwrite.
+	**Drafted by the UXR Research Readiness Assistant.** This brief was written automatically from an intake conversation with the requester. Everything in it is a proposal — it can be incomplete or wrong: the priority scores, the recommended method, the ownership verdict, and any drafted study material are for UXR triage to confirm, adjust, or overwrite.
 	*Skill v[version from this skill's frontmatter] · [the AI tool this ran in] · [date the ticket was written]*
 </callout>
 
@@ -1590,8 +1613,10 @@ Always fill this template in English, whatever language the conversation is in �
 </callout>
 
 <callout icon="🧭" color="purple_bg">
+	**An AI-generated proposal, not a decision.** The assistant put this together from the intake conversation. It can be incomplete, and it can be plainly wrong.
 	**Recommended method:** [Method] · **Tool:** [Tool or "none needed"]
 	**Ownership verdict:** [Self-serve, UXR sparring, or UXR-led — one sentence, stated plainly, with the risk-based reason and the rough time commitment]
+	**Check these three before anyone builds anything:** does this method actually answer the decision named above; is the effort realistic for the time and the people available; and can the target group really be reached this way. If any of the three does not hold — or if you are unsure — settle it with the UXR team first.
 </callout>
 
 **Playbooks and templates to use for this method:** [Only the EGYM playbooks, templates, and legal guidance that apply to this recommendation, each as **[Title](link)** with a few words on what it covers. When nothing internal applies, say so rather than padding the list.]
@@ -1599,51 +1624,88 @@ Always fill this template in English, whatever language the conversation is in �
 **Effort estimate:** [XS–XL] — [reason]
 *Scored here rather than with the other three, because effort only means anything once the method is on the table. Deliberately not part of the priority: a cheap study can be low priority and an expensive one urgent.*
 
-### Why this method, and what it will not tell you {toggle="true"}
-	**Why it fits:** [Reasoning tied to the question]
-	**What it will not establish:** [Main limitation]
-	**Indicative sample:** [Range and rationale]
-	**Research type:** [Foundational or Operational, with reasoning]
-	**Is research the right instrument:** [Confirm a study fits, or recommend a workshop, prioritisation session, analytics investigation, or evidence synthesis instead — with the sequence if both are needed]
-	**Known limitations / bias:** [Risks]
-	**Open questions:** [Remaining information needed]
-
 ## Building and running the study
 <callout icon="🛠️" color="gray_bg">
-	Everything needed to actually run this: the drafted instrument and the quality guidance for this method. Written for whoever picks the study up — if you came here to understand or prioritise the request, you can stop above.
+	Everything needed to actually run this — the method reasoning, the drafted instrument, and the quality guidance — is on the sub-page linked below. It is written for whoever picks the study up. If you came here to understand or prioritise the request, you are finished at this point.
 </callout>
 
-### The study, drafted — [method] in [tool] {toggle="true"}
-	*First draft, complete enough to build. Needs review before use.*
+[The sub-page "Research guidance & study material". Notion adds this link block automatically when the sub-page is created under this ticket — check that it is there, and add it by hand as a link if it is not.]
+```
 
-	<callout icon="⚙️" color="blue_bg">
-		**Setup**
-		[n] participants · [who they are]
-		~[n] min · [how it is fielded]
-		[Tool, plus anything that constrains the build: panel credits, a prototype that has to exist first, incentive]
-	</callout>
+### The Sub-Page: "Research guidance & study material"
 
-	<callout icon="📚" color="purple_bg">
-		**What this draft builds on**
-		**Dropped:** [what the study deliberately does not ask, and which find settled it — linked]
-		**Re-testing:** [what prior work pointed at but did not settle, and which check it failed — age, sample, directness, basis, or agreement]
-		**Testing, not assuming:** [the stakeholder assumptions this study challenges, with their source]
-		**New ground:** [the part nothing existing covers]
-		[Only lines that apply. Only finds that bear on this question — topical adjacency is not relevance. When nothing found reaches the question, this box is one line: **New ground.**]
-	</callout>
+Every ticket is two pages, and the split is not cosmetic. A finished brief that carried the method reasoning, the full instrument, and the quality pack ran past 260 lines, and at that length the request itself stops being findable — a stakeholder scrolls past the decision they were meant to make on their way through an interview guide they will never run. So the ticket holds the request and the recommendation, and a single sub-page holds everything needed to execute.
 
-	<details>
-		<summary>**[The interview guide / The questionnaire / The task set]**</summary>
-		[The instrument as a table, following STEP 5c. Moderated work: Time · Block · Questions & probes · What it answers. Surveys, usability tasks, card sorts, and tree tests: # · Question · Type · Options / scale · Logic · What it answers. Every response option and both scale endpoints are spelled out, and any question derived from a find carries its linked source tag.]
-	</details>
+**Nothing is shortened by the split.** Every section that used to sit under "Building and running the study" moves across in full. If something looks superfluous while you are writing it, it still goes on the sub-page — say so to the requester instead of dropping it.
 
-	**Questions to avoid, and why.** [The leading or predictive questions that would damage this particular study, each with its reason.]
+Create it as a child page of the ticket, titled exactly **Research guidance & study material**, with the same 🤖 page icon as the ticket. Give it the same agent callout: someone can reach this page from search without ever seeing the brief, and they need to know it was drafted automatically just as much as the triage reader does.
 
-	[When the study runs in Lyssna and the requester asked for it, add a nested toggle "Build it in Lyssna" — indented one further tab — containing the build sheet and, in a code block, the browser-agent prompt from STEP 5d. Omit it entirely when they declined.]
+```markdown
+<callout icon="🤖" color="orange_bg">
+	**Drafted by the UXR Research Readiness Assistant.** This study material was written automatically from an intake conversation with the requester. Everything in it is a proposal — it can be incomplete or wrong: the method reasoning, the drafted instrument, and the quality guidance are all first drafts for a researcher to confirm, adjust, or overwrite.
+	*Skill v[version from this skill's frontmatter] · [the AI tool this ran in] · [date the ticket was written]*
+</callout>
 
-### Quality guidance for this method {toggle="true"}
-	*Open this when you are about to build the study, not while you are reading the request. It is the method-specific version of "what usually goes wrong here" — written for whoever runs this study, so they do not have to rediscover it the hard way.*
+*Study material for **[link to the ticket]**, where the request, the evidence, and the priority proposal live. Read that page first — nothing here makes sense without the question it belongs to.*
 
+<details>
+	<summary>**Contents**</summary>
+	<table_of_contents/>
+</details>
+
+## Why this method, and what it will not tell you
+<callout icon="🧭" color="gray_bg">
+	The reasoning behind the recommendation on the brief, and its honest limits. Read this before building anything — it is what the draft below assumes, and it is the fastest place to disagree.
+</callout>
+
+**Why it fits:** [Reasoning tied to the question]
+**What it will not establish:** [Main limitation]
+**Indicative sample:** [Range and rationale]
+**Research type:** [Foundational or Operational, with reasoning]
+**Is research the right instrument:** [Confirm a study fits, or recommend a workshop, prioritisation session, analytics investigation, or evidence synthesis instead — with the sequence if both are needed]
+**Known limitations / bias:** [Risks]
+**Open questions:** [Remaining information needed]
+
+## The study, drafted — [method] in [tool]
+<callout icon="🛠️" color="gray_bg">
+	The instrument itself, complete enough to open the tool and build from. Everything here is a first draft that needs a review before it is used.
+</callout>
+
+*First draft, complete enough to build. Needs review before use.*
+
+<callout icon="⚙️" color="blue_bg">
+	**Setup**
+	[n] participants · [who they are]
+	~[n] min · [how it is fielded]
+	[Tool, plus anything that constrains the build: panel credits, a prototype that has to exist first, incentive]
+</callout>
+
+<callout icon="📚" color="purple_bg">
+	**What this draft builds on**
+	**Dropped:** [what the study deliberately does not ask, and which find settled it — linked]
+	**Re-testing:** [what prior work pointed at but did not settle, and which check it failed — age, sample, directness, basis, or agreement]
+	**Testing, not assuming:** [the stakeholder assumptions this study challenges, with their source]
+	**New ground:** [the part nothing existing covers]
+	[Only lines that apply. Only finds that bear on this question — topical adjacency is not relevance. When nothing found reaches the question, this box is one line: **New ground.**]
+</callout>
+
+### [The interview guide / The questionnaire / The task set] {toggle="true"}
+	[The instrument as a table, following STEP 5c. Moderated work: Time · Block · Questions & probes · What it answers. Surveys, usability tasks, card sorts, and tree tests: # · Question · Type · Options / scale · Logic · What it answers. Every response option and both scale endpoints are spelled out, and any question derived from a find carries its linked source tag.]
+
+### Supporting forms and companion instruments {toggle="true"}
+	[Anything the study needs alongside the main instrument, each drafted in full and labelled with when it is used: a pre-session screener or intake form, a post-session ranking or trade-off exercise, a short companion survey that picks up what the main instrument deliberately leaves out. Say for each what it must *not* contain, where that matters. Omit this toggle entirely when the study has none — never leave it in as an empty heading.]
+
+**Questions to avoid, and why.** [The leading or predictive questions that would damage this particular study, each with its reason.]
+
+### Build it in Lyssna {toggle="true"}
+	[Only when the study runs in Lyssna and the requester asked for it: the build sheet and, in a code block, the browser-agent prompt from STEP 5d. Omit the toggle entirely when they declined.]
+
+## Quality guidance for this method
+<callout icon="🔎" color="gray_bg">
+	What usually goes wrong with this particular method, and how to catch it before it costs you the study. Open it when you are about to build, not while you are reading the request.
+</callout>
+
+### Do and don't {toggle="true"}
 	<callout icon="✅" color="green_bg">
 		**Do**
 		[Method-specific practices, as a short bulleted list]
@@ -1654,13 +1716,13 @@ Always fill this template in English, whatever language the conversation is in �
 		[Likely failure modes, as a short bulleted list]
 	</callout>
 
-	#### Before launch
+### Before launch {toggle="true"}
 	[Tailored readiness and pilot checklist, as `- [ ]` to-do items so it can actually be ticked off]
 
-	#### During collection
+### During collection {toggle="true"}
 	[Facilitation or data-quality guardrails]
 
-	#### During analysis
+### During analysis {toggle="true"}
 	[Analysis and reporting guardrails]
 ```
 
@@ -1674,33 +1736,34 @@ A finished brief is long, and it is read by people with different jobs. A stakeh
 - **Every `##` section opens with a grey purpose callout.** One or two sentences on what the section is for and who should care — written for a stakeholder who has never seen a research brief. This is the only use of grey, so the pattern stays recognisable as "this explains the section". Never let it restate the section's content; if the callout and the content say the same thing, the callout is wasted.
 - **Section titles state their content, not their category.** "What we already know — and what we don't" tells a reader what is inside; "Background & evidence" makes them open it to find out. Keep the titles in the template unless the study genuinely needs a different one.
 - **The date is a real Notion date mention**, not plain text, so it is readable at a glance and matches the `Date` property. When the requester named no date, drop that line from the callout entirely — never invent one and never write "TBD". The full timing picture still lives under "Timing & dependencies".
-- **Collapse the reference material, keep the decisions open.** "Prior research on this question", "Material and links collected during intake", "Published research and benchmarks", "Why this method, and what it will not tell you", "The study, drafted", and "Quality guidance for this method" are toggle headings. The research question, the decision, the ownership verdict, the recommended method, and the priority proposal stay expanded — those are what triage reads first.
-- **The instrument table sits in its own nested toggle inside "The study, drafted".** A full guide or questionnaire runs to dozens of rows, and left open it buries the three things a reader needs first: what the setup costs, what the draft builds on, and which questions must be avoided. Collapsed, those stay visible and the table is one click away for whoever actually builds the study. Name the toggle for what it holds — "The interview guide", "The questionnaire", "The task set".
-- **The table of contents sits in a plain collapsed toggle labelled "Contents".** It is navigation, not content: a stakeholder opening the brief should land on the summary and the first decision, not on a twenty-line list of headings. Use a plain toggle rather than a toggle heading, so the contents block does not list itself. "How to read the priority scores" sits beside it as a second plain toggle, for the same reason.
+- **Collapse the reference material, keep the decisions open.** On the ticket, "Prior research on this question", "Material and links collected during intake", and "Published research and benchmarks" are toggle headings. The research question, the decision, the ownership verdict, the recommended method, and the priority scores stay expanded — those are what triage reads first. On the sub-page, the long blocks collapse the same way: the instrument table, the supporting forms, the Lyssna build sheet, and each part of the quality pack.
+- **The instrument table sits in its own toggle.** A full guide or questionnaire runs to dozens of rows, and left open it buries the three things a reader needs first: what the setup costs, what the draft builds on, and which questions must be avoided. Collapsed, those stay visible and the table is one click away for whoever actually builds the study. Name the toggle for what it holds — "The interview guide", "The questionnaire", "The task set".
+- **The table of contents sits in a plain collapsed toggle labelled "Contents".** It is navigation, not content: a stakeholder opening the brief should land on the summary and the first decision, not on a twenty-line list of headings. Use a plain toggle rather than a toggle heading, so the contents block does not list itself. "How to read the priority scores" sits beside it as a second plain toggle, for the same reason. The sub-page carries its own "Contents" toggle.
 - **The four priority scores are not a section of their own.** Each is written in the section that argues for it — Urgency and Decision Impact under Context, Confidence Gap under what we already know, Effort under the recommended approach — so a reader meets the number where the reasoning already is. A separate priority block forced the same reasoning to be told twice and split the recommendation from the study it belongs to.
-- **The page is built for two audiences, in that order.** Everything down to the priority proposal is for whoever decides whether and when this study happens. "Building and running the study" is for whoever then executes it. The purpose callout on that section says so explicitly, and that sentence matters more than it looks: it gives a stakeholder permission to stop reading, which is the difference between a brief that gets read and one that gets skimmed and misjudged.
+- **The two audiences get a page each, in that order.** The ticket is for whoever decides whether and when this study happens; it ends at "Recommended approach" and a link onward. The sub-page is for whoever then executes it. This used to be one page divided by a heading, and it did not hold: the request was buried under an interview guide, and stakeholders skimmed past the decision they were there to make. The purpose callout under "Building and running the study" says outright that a stakeholder is finished at that point, and that sentence matters more than it looks — it is the difference between a brief that gets read and one that gets skimmed and misjudged.
+- **A link forward, and a link back.** The ticket ends with the sub-page; the sub-page opens with a line pointing back at the ticket. Neither page is self-explanatory alone, and someone can arrive at either one from search.
 - **Indent toggle children with tabs.** Unindented content is not inside the toggle, and the section silently falls open.
 - **Use the colour vocabulary consistently** so it carries meaning — see "Colour Legend" below. Do not colour anything else.
 - **Never collapse something to hide a weakness.** A thin prior-research section or an unresolved open question stays as visible as a strong one; the toggle is about length, not about presentation.
 
 ### Colour Legend
 
-Colour is a signal, not decoration. Every coloured block in the ticket uses one of these six meanings, and nothing else in the ticket is coloured. A page where colour appears everywhere signals nothing, so resist adding a seventh.
+Colour is a signal, not decoration. Every coloured block uses one of these six meanings, and nothing else on either page is coloured. A page where colour appears everywhere signals nothing, so resist adding a seventh — including for the AI-generated warning on the recommendation, which belongs *inside* the existing purple block rather than in a new coloured one.
 
 | Colour | Icon | Where | What it means |
 |---|---|---|---|
-| `orange_bg` | 🤖 | Top of the page, above the brief heading | This ticket was drafted by the assistant. Everything in it is a proposal. |
-| `blue_bg` | ⚡ / ⚙️ | Under `# UX Research Brief`, and at the top of "The study, drafted" | The thing below, at a glance. ⚡ summarises the request; ⚙️ summarises the study. |
-| `gray_bg` | varies per section | Under every `##` heading | What this section is for. Orientation, never content. |
-| `purple_bg` | 🧭 / 📚 | Under "Recommended approach", and at the top of "The study, drafted" | The assistant's core judgement, open to challenge. 🧭 method, tool, and who runs it; 📚 what the draft builds on and what it deliberately leaves out. |
-| `green_bg` | ✅ | Inside "Quality guidance for this method" | Do this. |
-| `red_bg` | ⛔ | Inside "Quality guidance for this method" | Don't do this. |
+| `orange_bg` | 🤖 | Top of both pages, above everything else | This was drafted by the assistant. Everything in it is a proposal, and it can be wrong. |
+| `blue_bg` | ⚡ / ⚙️ | ⚡ under `# UX Research Brief` on the ticket; ⚙️ at the top of the drafted study on the sub-page | The thing below, at a glance. ⚡ summarises the request; ⚙️ summarises the study. |
+| `gray_bg` | varies per section | Under every `##` heading, on both pages | What this section is for. Orientation, never content. |
+| `purple_bg` | 🧭 / 📚 | 🧭 under "Recommended approach" on the ticket; 📚 at the top of the drafted study on the sub-page | The assistant's core judgement, open to challenge. 🧭 method, tool, who runs it, and the explicit warning that this is an AI proposal to be checked; 📚 what the draft builds on and what it deliberately leaves out. |
+| `green_bg` | ✅ | Inside "Quality guidance for this method", on the sub-page | Do this. |
+| `red_bg` | ⛔ | Inside "Quality guidance for this method", on the sub-page | Don't do this. |
 
 Keep this legend in the skill, not in the ticket. A legend printed on every ticket would be a seventh coloured box explaining the other six, which is exactly the clutter the colour system exists to prevent. The meanings have to be obvious from context — if a reader needs the legend to understand a block, that block is wrong.
 
 ### Linking Every Source
 
-Every source, document, board, dashboard, and prior study named anywhere in the ticket must be a clickable Markdown link wherever a URL exists.
+Every source, document, board, dashboard, and prior study named anywhere on the ticket or its sub-page must be a clickable Markdown link wherever a URL exists.
 
 - Write **[Title](link)** — a title alone strands the reader, and a bare URL tells them nothing about what they are about to open.
 - This applies everywhere, not only under "Material and links collected during intake": prior research finds, Notion pages, Slack threads, Figma files, Miro boards, Mixpanel dashboards, recordings, and documents.
@@ -1713,7 +1776,7 @@ Every source, document, board, dashboard, and prior study named anywhere in the 
 
 Distinguish the three parts:
 - The main brief records information supplied or confirmed by the requester.
-- "Recommended approach", the priority scores, and "Building and running the study" contain the assistant's recommendations and inferences. Label them as such so a reviewer never mistakes an inference for something the requester said.
+- "Recommended approach", the priority scores, and everything on the "Research guidance & study material" sub-page contain the assistant's recommendations and inferences. Label them as such so a reviewer never mistakes an inference for something the requester said.
 - The database properties carry what is safe to infer, including the three priority scores. They remain proposals that UXR triage can overwrite, which is why the reasoning also stays in the body. Anything that cannot be safely inferred stays out of the properties entirely.
 
 Do not turn stakeholder opinions into "what is already known" about users without labeling them as stakeholder evidence.
@@ -1817,16 +1880,30 @@ This skill is built on principles from Erika Hall's "Just Enough Research":
 
 ## Version History
 
-**v1.9.0 – v1.10.0** (August 25, 2026)
-- Reconstructed entry. The installed copy this was synced from carried `version: 1.10.0` in its frontmatter but no changelog entries past v1.8.0. Everything below is taken from the file itself; where exactly the two releases split is no longer recoverable, so they are documented together rather than invented apart
-- STEP 4 can now route a request to a heuristic evaluation instead of a study, but only conditionally: the question has to be about whether an existing or designed interface is understandable, findable, or easy to use, and there has to be a concrete artefact to inspect — a live URL, a Figma file, a prototype, screenshots, or even a described concept. Recruiting participants to re-discover guideline violations an expert review catches in a day is the specific waste this avoids
-- The offer is made once, in plain terms, with both limits stated up front: it is expert judgment rather than user data, so it cannot say why users struggle or whether they want the thing at all. Declining is a normal outcome and the intake continues unchanged — the skill never asks twice
-- Three outcomes are treated as equally fine: the evaluation answers the question and the intake closes on the report instead of a ticket, the evaluation sharpens the question and its open questions become the refined research questions, or the requester declines. The middle one is named as the most common good outcome, because it stops a study from spending sessions on usability bugs that were never going to need users
-- The evaluation runs inside this skill rather than being handed to another one. `references/heuristic-evaluation.md` is new and carries the full capability — input handling for live URLs via browser automation, screenshots, Figma/Miro, concepts and whole journeys; the evaluation lenses (Nielsen, WCAG, the brand.egym.com guidelines, the design system, UX writing, dark patterns, mobile, Baymard, Material/HIG, Gestalt); severity and confidence ratings; the report format; and the citation and honesty rules
-- The reference is read and followed exactly, and when it is missing the skill says so and offers the study path instead of improvising a half-review inside the intake. A partial expert review presented as a finished one is worse than no review at all
-- After an evaluation the flow comes back here: the report counts as existing evidence rather than as a study, so it re-enters at STEP 3 alongside the other prior research, and its suggested follow-ups become candidate research questions for STEP 2/5
-- The reference is a mirror of the standalone `heuristic-evaluation` skill and carries a maintenance note saying so, so the two copies are edited together rather than drifting apart
-- This is the first capability the skill loads from a separate file instead of holding inline, which is why the repository layout now has a `references/` directory next to `SKILL.md`
+**v1.11.0** (September 3, 2026)
+- The ticket is now two pages instead of one. A stakeholder ticket had grown to well over 250 lines — good content, unreadable shape, and the request itself was buried under an interview guide. The brief stops after "Recommended approach" and links onward; everything an executor needs moves to a child page called "Research guidance & study material". Nothing was cut to achieve this: the method reasoning, the drafted study, the quality guidance and the build sheet all move across in full, and the sub-page is built from toggles so it does not become a wall of text either
+- The sub-page carries the same robot icon and the same agent-generated callout as the ticket, because people arrive there from search without ever seeing the brief. If it cannot be created for any reason, the material goes back into the ticket body rather than being dropped — a long ticket is a nuisance, a missing interview guide is a lost study
+- The drafted study gained a slot for supporting instruments — pre-session forms, post-session forms, screeners, anything that ships alongside the main guide. Real tickets already contained these and the template had nowhere to put them, so they were at risk of being silently lost on a rewrite
+- The purple method callout now says outright that the recommendation is an AI-generated proposal that can be incomplete or plainly wrong, and it names three things to check before anyone builds: whether the method answers the decision, whether the effort is realistic, and whether the target group is reachable that way. It sits in the existing purple block rather than a new coloured one, because purple already means "the assistant's judgement, open to challenge" and a seventh colour would only dilute the system
+- The robot callout at the top of the ticket now adds "it can be incomplete or wrong" to the line about everything being a proposal. Confident formatting reads as settled fact, and the scores in particular were being taken that way
+- The scaffolding cleanup rule no longer depends on the exact wording of the Notion template. Anything above the `# UX Research Brief` heading is intake instruction and gets removed, named or not — the old list was tied to specific sentences and went stale the moment the template was rewritten, leaving setup toggles sitting in finished tickets. The rule comes with a guard: anything above the heading that a person visibly typed is content in the wrong place, so it is carried into the brief rather than deleted, and anything ambiguous is kept
+- The setup guide finally documents two things the assistant has been able to do for a while: building Lyssna drafts through browser automation, including why that is opt-in and not bundled, and the fact that the Notion connection now ships with the plugin instead of needing to be added by hand
+
+**v1.10.0** (August 25, 2026)
+- The heuristic evaluation stopped being a promise and became a capability. `references/heuristic-evaluation.md` is new and carries the whole thing, so the skill loads it from a separate file rather than holding it inline — which is why the repository now has a `references/` directory next to `SKILL.md`
+- It takes whatever the artefact happens to be: a live URL walked through with browser automation, screenshots, a Figma file, a clickable prototype, a Miro board, a written concept, or a whole end-to-end journey. Requiring a finished interface would have ruled out exactly the early-stage questions where an expert review saves the most
+- The review runs through a fixed set of lenses so two evaluations of the same screen are comparable: Nielsen's ten heuristics, WCAG 2.2, the EGYM Wellpass brand guidelines read live from brand.egym.com, the design system, UX writing and tone of voice, dark patterns and ethics, mobile-specific heuristics, Baymard, Material Design and Apple's HIG, and Gestalt
+- Every finding carries a severity from 0 to 4 and a confidence level, and the two together do real work: a finding that would hurt badly but that the reviewer is not sure about is automatically turned into a candidate research question. That is the honest answer to "this looks wrong but I cannot prove it" — it becomes something to test, not something to assert
+- The report has a fixed structure, every claim has to cite the guideline it rests on, and the sources used are listed at the end. An expert opinion that cannot be traced back to anything is just an opinion with formatting
+- The conversation can run in either language, but anything written into Notion is English, exactly like the rest of the skill
+- Afterwards the intake picks up where it left off: the report counts as existing evidence rather than as a completed study, so it re-enters at STEP 3 next to the other prior research, and its open questions feed STEP 2 and STEP 5
+- The reference is a mirror of the standalone `heuristic-evaluation` skill and carries a maintenance note saying so, so the two copies get edited together rather than drifting apart. When the file is missing, the skill says so and offers the study path instead of improvising — a partial expert review presented as a finished one is worse than no review at all
+
+**v1.9.0** (August 25, 2026)
+- STEP 4b gained an instrument check before the method recommendation. If the question is about whether an existing artefact is understandable, findable, or easy to use — "is our onboarding confusing?" — and there is something concrete to inspect, the assistant offers a heuristic evaluation as the first step instead of going straight to a study. Recruiting participants to re-discover guideline violations an expert review catches in a day is the specific waste this exists to avoid
+- The offer is made once, in plain terms, with the limits stated up front rather than buried: this is expert judgement, not user data, so it cannot say why people struggle or whether they want the thing at all
+- Three outcomes are all treated as fine. The evaluation answers the question, and the intake closes on the report instead of a ticket. Or it sharpens the question, and its open questions become the refined research questions — named as the most common good outcome, because it stops a study from spending sessions on usability bugs that were never going to need users. Or the requester says no, and the intake continues exactly as before. The assistant never asks a second time
+- The same release shipped a standalone `heuristic-evaluation` skill for audits that do not need an intake at all, and its content is mirrored into the reference file so the two stay in step
 
 **v1.8.0** (August 14, 2026)
 - The Context section now records the product roadmap item the request belongs to and the delivery ticket the results should feed into — two different things, kept separate. A study attached to nothing produces findings everyone agrees are interesting and nobody acts on, because no artefact was ever going to change
@@ -1899,6 +1976,8 @@ This skill is built on principles from Erika Hall's "Just Enough Research":
 - Documented the platform constraints that make build sheets buildable: no NPS/star/date question types, AI follow-ups on long text only, 40-character matrix labels, Figma Flow links for prototype tests, screeners versus panel targeting, and one credit per minute per response
 - States plainly that Lyssna has no API and no import, that its MCP server is read-only, and that nothing is created automatically — a browser agent saves the typing, not the reviewing
 - STEP 5d (priority proposal) becomes STEP 5e
+
+*The jump from v0.8.1 to v1.3.0 is a version jump, not a gap in the record. Versions 0.9.x to 1.2.x were never released, and nothing is missing here.*
 
 **v0.8.1** (August 4, 2026)
 - Prior research now reaches the ticket with its reasoning intact: each find is carried over as a linked title plus the line explaining what it means for the question, instead of collapsing into a bare list of URLs
