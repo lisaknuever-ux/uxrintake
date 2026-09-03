@@ -192,7 +192,11 @@ if you need to rebuild or adapt it.
 .claude-plugin/marketplace.json                 Same, for Claude Code
 .claude-plugin/plugin.json                      Claude Code plugin manifest
 skills/uxr-research-readiness-assistant/
-└── SKILL.md                                    The assistant itself
+├── SKILL.md                                    The assistant itself
+└── references/
+    └── heuristic-evaluation.md                 Full heuristic-evaluation capability,
+                                                read in-line when an expert review is
+                                                the better first step
 docs/notion-template.md                         Notion template content, copy-paste ready
 ```
 
